@@ -1,3 +1,5 @@
+/* 动效样式：控制滚动进入视口时的淡入动画 */
+/* 包含无动画偏好与无脚本环境的兼容处理 */
 .cc-animate-enabled [data-cc-animate] {
   opacity: 0;
 }

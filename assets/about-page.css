@@ -1,5 +1,7 @@
 /* ===== UNIFIED ABOUT PAGE STYLES ===== */
 /* Base Styles and Variables */
+/* 文件作用：关于页整体样式集合，涵盖品牌故事、时间轴、数据卡片、品牌墙与特色模块 */
+/* 说明：提供统一配色变量、布局与响应式规则，供相关模板与区块引用 */
 :root {
     --primary-color: #89C321;
     --secondary-color: #2B2945;

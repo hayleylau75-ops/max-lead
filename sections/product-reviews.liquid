@@ -1,0 +1,59 @@
+{% comment %}
+  产品评论区块 - 直接显示版本
+{% endcomment %}
+
+{% if section.blocks.size > 0 %}
+  {% unless template == 'product' %}
+    <div class="page-width">
+  {% endunless %}
+    <div class="product-reviews-section">
+      <div class="container">
+        <div class="card">
+          {% for block in section.blocks %}
+            {% if block.type == '@app' %}
+              {%- render block -%}
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% unless template == 'product' %}
+    </div>
+  {% endunless %}
+{% endif %}
+
+{% schema %}
+{
+  "name": "Product Reviews",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Reviews"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+  .product-reviews-section {
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(var(--text-color)/0.15);
+  }
+
+  .product-reviews-section .container {
+    padding: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    .product-reviews-section {
+      margin-top: 20px;
+      padding-top: 20px;
+    }
+  }
+</style> 

@@ -1,0 +1,267 @@
+{{ 'collection-banner.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  if section.settings.show_collection_description and collection.description != blank
+    assign is_description = true
+  else
+    assign is_description = false
+  endif
+
+  assign collection_image_size = section.settings.collection_image
+  if section.settings.show_collection_title == false and is_description == false and collection_image_size == "fill"
+    assign collection_image_size = "natural"
+  endif
+
+  if collection_image_size != "none"
+    if section.settings.use_product_image
+      assign collection_image_object = collection.all_products.first.featured_media.preview_image
+    else
+      assign collection_image_object = collection.image
+    endif
+
+    assign force_image_ratio = false
+    if collection_image_size == "fill" or collection_image_size == "1.33" or collection_image_size == "1.77" or collection_image_size == "1" or collection_image_size == "0.75"
+      assign force_image_ratio = true
+      if collection_image_size != "fill"
+        assign image_ratio = collection_image_size
+        assign fixed_image_ratio = true
+      endif
+    endif
+  endif
+
+  if collection_image_size != "none" and collection_image_object
+    assign collection_image = true
+  else
+    assign collection_image = false
+  endif
+
+  assign color_scheme = section.settings.color_scheme
+-%}
+
+<style>
+  /* 修改样式使文本从左到右正常显示 */
+  .collection-banner-vertical {
+    display: block;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: left; /* 改为左对齐 */
+  }
+  
+  .collection-banner__media-vertical {
+    width: 100%;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .collection-banner__content-vertical {
+    width: 100%;
+    text-align: left; /* 改为左对齐 */
+    padding: 0;
+  }
+  
+  .collection-banner__heading {
+    text-align: left; /* 标题左对齐 */
+  }
+  
+  .collection-banner__count {
+    text-align: left; /* 产品计数左对齐 */
+  }
+  
+  .rte {
+    text-align: left; /* 描述文本左对齐 */
+  }
+  
+  @media (max-width: 767px) {
+    .collection-banner-vertical {
+      padding: 15px;
+    }
+  }
+</style>
+
+<div class="container">
+  <div class="collection-banner-vertical">
+    {% if collection_image %}
+      <div class="collection-banner__media-vertical">
+        {%- capture sizes %}(min-width: 1296px) 1296px, (min-width: 960px) 960px, (min-width: 800px) 800px, 700px{% endcapture -%}
+        
+        {% if fixed_image_ratio %}
+          <div class="aspect-ratio-box" style="padding-top: {{ 1 | divided_by: image_ratio | times: 100 }}%;">
+        {% endif %}
+        
+        {% render 'image',
+          image: collection_image_object,
+          widths: '700, 800, 960, 1296',
+          src_width: 1296,
+          sizes: sizes,
+          lazy_load: false,
+          class: 'mx-auto'
+        %}
+        
+        {% if fixed_image_ratio %}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+
+    <div class="collection-banner__content-vertical {% unless color_scheme == 'default' %}color-scheme color-scheme--{{ color_scheme }}{% endunless %}">
+      {% if section.settings.show_collection_title %}
+        <h1 class="collection-banner__heading mb-2">
+          {{ collection.title | escape }}
+        </h1>
+        {% if section.settings.show_product_count %}
+          <p class="collection-banner__count mb-4">
+            ({{ 'sections.collection.product_count.other' | t: count: collection.all_products_count }})
+          </p>
+        {% endif %}
+      {% endif %}
+      
+      {% if is_description %}
+        <div class="rte mt-4">
+          {{ collection.description }}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection banner",
+  "class": "cc-collection-banner section section--template",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "Add a description or image by editing your collection. [Learn more](https://help.shopify.com/en/manual/products/collections/collection-layout)"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_title",
+      "label": "Show collection title",
+      "info": "If hidden, you should provide a primary page heading (h1 tag) in another section with h1 option (rich text, image banner, slideshow, video) for SEO purposes.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_count",
+      "label": "Show product count",
+      "info": "Only visible if the title is shown.",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_collection_description",
+      "label": "Show collection description",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Content alignment",
+      "options": [
+        {
+          "value": "text-start",
+          "label": "Left"
+        },
+        {
+          "value": "items-center text-center",
+          "label": "Center"
+        },
+        {
+          "value": "items-end justify-end text-end",
+          "label": "Right"
+        }
+      ],
+      "default": "text-start"
+    },
+    {
+      "type": "select",
+      "id": "collection_image",
+      "label": "Collection image",
+      "default": "natural",
+      "options": [
+        {
+          "value": "natural",
+          "label": "Natural"
+        },
+        {
+          "value": "1.33",
+          "label": "Landscape (4:3)"
+        },
+        {
+          "value": "1.77",
+          "label": "Landscape (16:9)"
+        },
+        {
+          "value": "1",
+          "label": "Square"
+        },
+        {
+          "value": "0.75",
+          "label": "Portrait"
+        },
+        {
+          "label": "Fill",
+          "value": "fill"
+        },
+        {
+          "value": "none",
+          "label": "None"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "use_product_image",
+      "label": "Use the first product image as the collection image",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "text_width",
+      "label": "Content width",
+      "options": [
+        {
+          "value": "standard",
+          "label": "Standard"
+        },
+        {
+          "value": "wide",
+          "label": "Wide"
+        }
+      ],
+      "default": "standard",
+      "info": "Does not apply when \"Collection image\" is set to \"Natural\"."
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        {
+          "value": "default",
+          "label": "Default"
+        },
+        {
+          "value": "1",
+          "label": "Scheme 1"
+        },
+        {
+          "value": "2",
+          "label": "Scheme 2"
+        },
+        {
+          "value": "3",
+          "label": "Scheme 3"
+        }
+      ],
+      "default": "default"
+    }
+  ]
+}
+{% endschema %}

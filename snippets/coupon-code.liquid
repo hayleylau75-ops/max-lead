@@ -1,0 +1,348 @@
+{% assign main_color = '#0c8cd5' %}
+<style>
+  .promotion-note {
+    font-size: 16px;
+    font-weight: 600;
+    color: #f6563a;
+    margin: 10px;
+    display: block;
+    text-decoration: none;
+    line-height: 24px;
+  }
+  .promotion-note svg {
+    width: 14px;
+    height: 14px;
+  }
+  .promotion-note p {
+    margin-left: 2px;
+    display: inline;
+    text-decoration: underline;
+  }
+  .free_item {
+    position: relative;
+  }
+  .free_item a:first-child {
+    margin-bottom: 25px;
+  }
+  .free_item a:first-child:after {
+    content: "+";
+    position: absolute;
+    color: #666666;
+    font-size: 24px;
+    top: 41%;
+    left: 50%;
+  }
+  .free_item a {
+    border-radius: 20px;
+    border: 1px solid #efefef;
+    margin: 15px;
+  }
+  .free_item .search-flydown--product-price--main {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+  .free_item .money {
+    color: #666666
+  }
+  .search-flydown--product-image {
+    position: relative;
+  }
+</style>
+<style>
+  .sale-event {
+    padding: 10px 0;
+  }
+  .sale-event .event-box {
+    position: relative;
+    border-radius: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 5px 0px;
+    text-align: center;
+  }
+  .event-box .event-img {
+    width: 100%;
+    padding: 5px 0;
+  }
+
+  .event-img img {
+    width: 100%;
+    border-radius: 20px;
+    border: 1px solid #f1f1f1;
+  }
+
+  .event-box .event-code {
+    font-size: 14px;
+    align-self: center;
+    padding: 5px;
+    min-width: 135px;
+    z-index: 2;
+  }
+  .event-code .code-des {
+    font-weight: 800;
+    color: #666666;
+  }
+  .event-code .code-des span {
+    color: #f29f0e;
+  }
+
+  .event-code .code-btn {
+    padding-top: 5px;
+    color: #fff;
+  }
+  .event-code .code-btn a {
+    display: block;
+    width: 100%;
+    height: 40px;
+    position: relative;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 11px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+    max-width: 140px;
+    margin-left: auto;
+    margin-right: auto;
+    user-select: none;
+  }
+  .event-code .code-btn a {
+    color: #fff;
+    background-color: #f29f0e;
+    border: 1px solid #eaeaea;
+  }
+  .event-code .code-btn a span {
+    height: 100%;
+    width: 100%;
+    transition: all 0.5s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+  }
+  .event-code .code-btn a .code-name {
+    display: block;
+    text-align: center;
+  }
+  .event-code .code-btn a .success {
+    position: absolute;
+    top: 0;
+    visibility: hidden;
+    width: 0;
+    cursor: default;
+    opacity: 0;
+    left: 100%;
+  }
+  .event-code .code-btn a .success svg {
+    fill: #fff;
+    width: 100%;
+    height: 40px;
+  }
+  .event-code .code-btn a.check {
+    color: transparent;
+    background: {{ main_color }};
+    transition: color 0.5s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+    transition: background 0.5s cubic-bezier(0.31, -0.105, 0.43, 1.4);
+  }
+  .event-code .code-btn a.check .code-name {
+    left: -100%;
+    opacity: 0;
+  }
+  .event-code .code-btn a.check .success {
+    width: inherit;
+    visibility: visible;
+    left: 0;
+    opacity: 1;
+  }
+  .event-note {
+    display: block;
+    text-align: center;
+  }
+  .event-note p {
+    font-size: 14px;
+    font-style: italic;
+    margin: 5px 0 0 0;
+  }
+</style>
+
+{% assign main_color = '#f29f0e' %}
+<div class="couponcode">
+  <style>
+    .coupon_code.invsb {
+    display: none;
+    }
+    .coupon_code {
+    padding: 5px 0;
+    text-align: center;
+    }
+      .coupon_code .bold {
+      font-style: oblique;
+      font-weight: 600;
+      font-size: 14px;
+      color: #f6563a;
+    }
+    .coupon_code .coupontext {
+      color: #666666 !important;
+      padding: 4px !important;
+      border-radius: 8px !important;
+      line-height: 1 !important;
+      width: auto !important;
+      margin-right: auto !important;
+      border: 1px solid #6ec2e6 !important;
+      font-size: 12px !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      flex-wrap: nowrap !important;
+      gap: 6px !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      overflow: visible !important;
+    }
+    .coupon_code a {
+      padding: 5px 15px;
+      margin-left: 0 !important;
+      border-radius: 5px;
+      width: auto !important;
+      min-width: 60px !important;
+      background-color: #94c600;
+      color: #fff;
+      box-shadow: 0 0 8px 0px rgb(100 100 100 / 50%);
+      cursor: pointer;
+      font-size: 12px;
+      text-decoration: none !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+    }
+    @media (max-width: 749px) {
+      .coupon_code .coupontext {
+      margin-left: auto;
+      margin-right: auto;
+      font-size:12px;
+    }
+      .coupon_code .bold{
+        font-size:14px;
+      }
+    }
+  </style>
+  {% assign is_product_code = false %}
+  {% if codevalue and codename != blank %}
+    {% assign is_product_code = true %}
+    <div class="coupon_code">
+      <div class="coupontext" style="display: flex !important; align-items: center !important; justify-content: center !important; flex-wrap: nowrap !important; gap: 6px !important; white-space: nowrap !important; line-height: 1 !important;">Use code <span class="bold" id="couponcode" code-name="{{ codename | strip }}">{{ codename | strip }}</span> to save <span class="bold" code-value="{{ codevalue }}">{{ codevalue }}</span> ! <a onclick="copyToClipboard('#couponcode')" style="margin-left: 0 !important;">SAVE</a></div>
+    </div>
+  {% else %}
+    {% if product.selected_variant %}
+      {% if product.selected_variant.metafields.custom.code_discount_value != blank %}
+        <div class="coupon_code variants">
+          <div class="coupontext" style="display: flex !important; align-items: center !important; justify-content: center !important; flex-wrap: nowrap !important; gap: 6px !important; white-space: nowrap !important; line-height: 1 !important;">Use code <span class="bold" id="couponcode" code-name="{{ product.selected_variant.metafields.custom.code_name }}">{{- product.selected_variant.metafields.custom.code_name -}}</span> to save <span class="bold" code-value="{{ product.selected_variant.metafields.custom.code_discount_value }}">{{- product.selected_variant.metafields.custom.code_discount_value -}}</span> ! <a onclick="copyToClipboard('#couponcode')" style="margin-left: 0 !important;">SAVE</a></div>
+        </div>
+      {% else %}
+        <div class="coupon_code variants" style="display:none;">
+          <div class="coupontext" style="display: flex !important; align-items: center !important; justify-content: center !important; flex-wrap: nowrap !important; gap: 6px !important; white-space: nowrap !important; line-height: 1 !important;">Use code <span class="bold" id="couponcode" code-name=""></span> to save <span class="bold" code-value=""></span> ! <a onclick="copyToClipboard('#couponcode')" style="margin-left: 0 !important;">SAVE</a></div>
+        </div>
+      {% endif %}
+    {% else %}
+      {% for variant in product.variants limit: 1 %}
+        {% if variant.available and variant.metafields.custom.code_name != blank %}
+          <div class="coupon_code variants">
+            <div class="coupontext" style="display: flex !important; align-items: center !important; justify-content: center !important; flex-wrap: nowrap !important; gap: 6px !important; white-space: nowrap !important; line-height: 1 !important;">Use code <span class="bold" id="couponcode" code-name="{{ variant.metafields.custom.code_name }}">{{- variant.metafields.custom.code_name -}}</span> to save <span class="bold" code-value="{{ variant.metafields.custom.code_discount_value }}">{{- variant.metafields.custom.code_discount_value -}}</span> ! <a onclick="copyToClipboard('#couponcode')" style="margin-left: 0 !important;">SAVE</a></div>
+          </div>
+        {% else %}
+          <div class="coupon_code variants" style="display:none;">
+            <div class="coupontext" style="display: flex !important; align-items: center !important; justify-content: center !important; flex-wrap: nowrap !important; gap: 6px !important; white-space: nowrap !important; line-height: 1 !important;">Use code <span class="bold" id="couponcode" code-name=""></span> to save <span class="bold" code-value=""></span> ! <a onclick="copyToClipboard('#couponcode')" style="margin-left: 0 !important;">SAVE</a></div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+  <script>
+    function updatecode(title) {
+      {% unless is_product_code %}
+        var value = null;
+        var handle = "{{ product.handle }}";
+        var url = "/products/" + handle + "?view=code.json";
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                var data = JSON.parse(xhr.responseText);
+              console.log(data)
+                data.variants.forEach(function(variant) {
+                    var currttitle = variant.title;
+                    if (currttitle == title) {
+                        name = variant.codeinfo.codename;
+                        value = variant.codeinfo.codevalue;
+                    }
+                });
+                if (value !== null) {
+                    document.querySelector('.coupon-code-box').style.display = 'block';
+                    document.querySelector('.coupon_code').style.display = 'block';
+                    document.querySelector('[code-name]').setAttribute('code-name', name);
+                    document.querySelector('[code-value]').setAttribute('code-value', value);
+                    document.querySelector('[code-name]').innerHTML = name;
+                    document.querySelector('[code-value]').innerHTML = value;
+                } else {
+                    document.querySelector('div.coupon-code-box').style.display = 'none';
+                }
+            } else {
+                console.warn('ERROR', xhr.status);
+            }
+        };
+        xhr.send();
+      {% endunless %}
+
+    }
+  </script>
+  <script>
+    function copyToClipboard(element) {
+      // 获取要复制的文本
+      var targetElement = document.querySelector(element);
+      var textToCopy = targetElement ? targetElement.textContent.trim() : '';
+      
+      if (!textToCopy) {
+        alert("No code to copy!");
+        return;
+      }
+      
+      // 使用现代clipboard API
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(textToCopy).then(function() {
+          alert("Copied code: " + textToCopy + "! SHOP NOW!");
+          redirectToDiscount(textToCopy);
+        }).catch(function(err) {
+          console.error('Failed to copy: ', err);
+          fallbackCopyToClipboard(textToCopy);
+        });
+      } else {
+        // 降级方案：使用传统方法
+        fallbackCopyToClipboard(textToCopy);
+      }
+    }
+    
+    function fallbackCopyToClipboard(text) {
+      var textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+      
+      try {
+        document.execCommand('copy');
+        alert("Copied code: " + text + "! SHOP NOW!");
+        redirectToDiscount(text);
+      } catch (err) {
+        console.error('Fallback copy failed: ', err);
+        alert("Failed to copy. Please copy manually: " + text);
+      }
+      
+      document.body.removeChild(textArea);
+    }
+    
+    function redirectToDiscount(codeName) {
+      var url = window.location.pathname + window.location.search;
+      window.location.href = "/discount/" + encodeURIComponent(codeName) + "?redirect=" + encodeURIComponent(url);
+    }
+  </script>
+</div>

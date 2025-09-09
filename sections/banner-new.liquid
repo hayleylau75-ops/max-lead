@@ -1,0 +1,131 @@
+{% if section.settings.show_pop_iframe and section.settings.iframe_url != blank %}
+  <style>
+    .custom_iframe_pop{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      height:100%;
+      background-color:rgba(0,0,0,.4);
+    }
+    .custom_iframe_pop_container{
+      position:absolute;
+      left:50%;
+      top:0;
+      width:100%;
+      height:100%;
+      padding-top:50px;
+      max-width:1000px;
+    }
+  </style>
+{% endif %}
+
+<div
+  class="banner-new-box{% if section.settings.id != blank %} landing_section{% endif %} "
+  {% if section.settings.id != blank %}
+    id="{{ section.settings.id }}"
+  {% endif %}
+>
+  <div
+    class="{% unless section.settings.pc_full %}container{% endunless %} newActivityBanner {% if section.settings.m_full %}m_full_container{% endif %}"
+  >
+    {% comment %}
+      <a href="//pinterest.com/pin/create/button/?url={{ shop.secure_url |append:'/collections/' | append:collection.handle }}&media={{ section.settings.image_mb | img_url: '710x' }}">
+    {% endcomment %}
+    {% if section.settings.activity_url != blank or section.settings.custom_text_link != blank %}
+      <a
+        href="{{ section.settings.custom_text_link | default:section.settings.activity_url }}"
+        {% if section.settings.show_custom_html %}
+          data-htmlid="{{ section.settings.activity_url }}"
+          class="js_show_custom"
+        {% endif %}
+      >
+    {% endif %}
+
+    <img
+      class="d-m-none"
+      loading="lazy"
+      src="{{ section.settings.image | img_url: '1480x' }}"
+      width="{{ section.settings.image.width }}"
+      height="{{ section.settings.image.height }}"
+    >
+    <img
+      class="d-lg-none"
+      loading="lazy"
+      src="{{ section.settings.image_mb | img_url: '750x' }}"
+      width="{{ section.settings.image_mb.width }}"
+      height="{{ section.settings.image_mb.height }}"
+    >
+    {% if section.settings.activity_url != blank or section.settings.custom_text_link != blank %}
+      </a>
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+    "name": "Banner New",
+    "settings":[
+      {
+        "type": "text",
+        "id":"id",
+        "label": "Custom Id"
+      },
+        {
+            "type":"image_picker",
+            "id":"image",
+            "label":"pc image"
+        },
+        {
+            "type":"image_picker",
+            "id":"image_mb",
+            "label":"mobile image"
+        },
+        {
+          "type":"url",
+          "id":"activity_url",
+          "label":"url"
+        },
+        {
+          "type":"text",
+          "id":"custom_text_link",
+          "label":"Custom Text Link"
+        },
+      {
+        "type": "checkbox",
+        "id": "show_pop_iframe",
+        "label": "Show Pop Iframe",
+        "default":false
+      },
+         {
+        "type": "checkbox",
+        "id": "show_custom_html",
+        "label": "Show Custom Html",
+        "default":false
+      },
+      {
+        "type": "url",
+        "id": "iframe_url",
+        "label": "Iframe Url"
+      },
+        {
+          "type":"checkbox",
+          "id":"pc_full",
+          "label":"PC full width",
+          "default":false
+        },
+        {
+            "type":"checkbox",
+          "id":"m_full",
+          "label":"M full width",
+          "default":true
+        }
+    ],
+    "presets":[
+      {
+        "name":"Banner New"
+      }
+    ]
+
+}
+{% endschema %}

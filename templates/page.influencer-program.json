@@ -1,0 +1,182 @@
+{
+    "sections": {
+        "influencer_program": {
+            "type": "influencer-program",
+            "blocks": {
+                "benefit_1": {
+                    "type": "benefit_item",
+                    "settings": {
+                        "icon": "shopify://shop_images/grow-garden-save-big-icon.png",
+                        "title": "Grow Your Garden, Save Big",
+                        "description": "We offer store credits to help bring your garden dreams to life."
+                    }
+                },
+                "benefit_2": {
+                    "type": "benefit_item",
+                    "settings": {
+                        "icon": "shopify://shop_images/join-community-icon.png",
+                        "title": "Join Our Influencer Community",
+                        "description": "Connect and collaborate with like-minded influencers and opportunities to become a Vego Brand Ambassador."
+                    }
+                },
+                "benefit_3": {
+                    "type": "benefit_item",
+                    "settings": {
+                        "icon": "shopify://shop_images/be-seen-heard-icon.png",
+                        "title": "Be Seen, Be Heard",
+                        "description": "Showcase your passion for sustainable gardening and reach a wider audience for your gardening expertise."
+                    }
+                },
+                "reward_1": {
+                    "type": "reward_item",
+                    "settings": {
+                        "reward_text": "We provide $500 store credits to redeem for Vego Garden products."
+                    }
+                },
+                "reward_2": {
+                    "type": "reward_item",
+                    "settings": {
+                        "reward_text": "Opportunity to collaborate with like-minded influencers and be part of Vego Brand Ambassadors!"
+                    }
+                },
+                "reward_3": {
+                    "type": "reward_item",
+                    "settings": {
+                        "reward_text": "Learning about sustainable gardening practices that you can share with your own community."
+                    }
+                },
+                "reward_4": {
+                    "type": "reward_item",
+                    "settings": {
+                        "reward_text": "Exposure to a wider audience through Vego Garden's social media channels."
+                    }
+                },
+                "reward_5": {
+                    "type": "reward_item",
+                    "settings": {
+                        "reward_text": "Ability to earn commission on referred sales with our unique affiliate links once you join the program."
+                    }
+                },
+                "requirement_1": {
+                    "type": "requirement_item",
+                    "settings": {
+                        "requirement_text": "A minimum of 10K followers on Instagram, 5000 subscribers on Youtube, Or 10K followers on Tiktok, all authentic, of course!"
+                    }
+                },
+                "requirement_2": {
+                    "type": "requirement_item",
+                    "settings": {
+                        "requirement_text": "Passionate about promoting healthy living and sustainable gardening."
+                    }
+                },
+                "requirement_3": {
+                    "type": "requirement_item",
+                    "settings": {
+                        "requirement_text": "Producing high-quality content that aligns with our brand values."
+                    }
+                },
+                "testimonial_1": {
+                    "type": "testimonial_item",
+                    "settings": {
+                        "testimonial_text": "I've been a part of the Veggie Influencers Program for over a year now and it's been amazing! The team at Vego Garden is so welcoming, and I love collaborating with them on campaigns that promote healthy lifestyles and sustainable gardening. Plus, the exclusive discounts on their products are a great bonus!",
+                        "testimonial_author": "Sandra @sandra.urbangarden"
+                    }
+                },
+                "testimonial_2": {
+                    "type": "testimonial_item",
+                    "settings": {
+                        "testimonial_text": "Joining the Veggie Influencers Program has been a game-changer for my Instagram page. Not only can I share my passion for healthy living with my followers, but I'm also learning so much about sustainable gardening practices. Plus, the exposure I've gained through Vego Garden's social media channels has been incredible!",
+                        "testimonial_author": "Destin @texasgardenguy"
+                    }
+                },
+                "program_1": {
+                    "type": "program_item",
+                    "settings": {
+                        "program_image": "shopify://shop_images/giving-back-program.jpg",
+                        "program_title": "Giving Back Program",
+                        "program_description": "We donate one Vego Garden Kit for every 50 kits that are sold.",
+                        "program_link": "/pages/giving-back",
+                        "program_link_text": "Submit Your Application >"
+                    }
+                },
+                "program_2": {
+                    "type": "program_item",
+                    "settings": {
+                        "program_image": "shopify://shop_images/affiliate-program.jpg",
+                        "program_title": "Affiliate Program",
+                        "program_description": "Introducing our Vego Grove - a space where we partner with leading global gardeners.",
+                        "program_link": "/pages/affiliate",
+                        "program_link_text": "Become a Partner >"
+                    }
+                },
+                "program_3": {
+                    "type": "program_item",
+                    "settings": {
+                        "program_image": "shopify://shop_images/vego-garden-kids.jpg",
+                        "program_title": "#VegoGardenKids Program",
+                        "program_description": "Creating a welcoming environment for all gardeners... even little ones!",
+                        "program_link": "/pages/vego-garden-kids",
+                        "program_link_text": "Join and Get A 50% Refund >"
+                    }
+                }
+            },
+            "block_order": [
+                "benefit_1",
+                "benefit_2",
+                "benefit_3",
+                "reward_1",
+                "reward_2",
+                "reward_3",
+                "reward_4",
+                "reward_5",
+                "requirement_1",
+                "requirement_2",
+                "requirement_3",
+                "testimonial_1",
+                "testimonial_2",
+                "program_1",
+                "program_2",
+                "program_3"
+            ],
+            "settings": {
+                "show_hero": true,
+                "hero_title": "Welcome to Vego Garden's Veggie Influencers Program!",
+                "hero_subtitle": "Join us, and let's inspire sustainable gardening & encourage gardening to more audiences!",
+                "hero_cta_text": "Join Now and Start Growing",
+                "show_why_join": true,
+                "why_join_title": "Why Partner with MaxLead",
+                "why_join_subtitle": "Join our network of successful partners and grow your business with MaxLead",
+                "show_what_we_offer": true,
+                "what_we_offer_title": "What We Offer",
+                "what_we_offer_text_1": "At Vego Garden, we believe that everyone deserves access to healthy and sustainable food. Our Veggie Influencers Program is designed for passionate influencers who share our values and want to inspire others to live a healthier, more sustainable lifestyle.",
+                "what_we_offer_text_2": "By joining our program, you'll have the opportunity to collaborate with us on exciting campaigns and projects while learning about sustainable gardening practices.",
+                "what_we_offer_image": "shopify://shop_images/what-we-offer-collage.jpg",
+                "show_exclusive_rewards": true,
+                "exclusive_rewards_title": "Exclusive Rewards",
+                "exclusive_rewards_image": "shopify://shop_images/exclusive-rewards-collage.jpg",
+                "show_eligibility": true,
+                "eligibility_title": "Eligibility Requirements",
+                "eligibility_image": "shopify://shop_images/eligibility-requirements.jpg",
+                "show_meet_grove": true,
+                "meet_grove_title": "How It Works",
+                "meet_grove_text_1": "Our partnership process is simple and straightforward. Here's how you can get started with MaxLead.",
+                "meet_grove_text_2": "Join thousands of successful partners who have grown their business with our proven strategies and support.",
+                "meet_grove_image": "shopify://shop_images/how-it-works-process.jpg",
+                "meet_grove_cta_text": "Get Started Today",
+                "meet_grove_cta_link": "/pages/partnership-application",
+                "show_start_influencing": true,
+                "start_influencing_title": "Start Influencing with Vego",
+                "start_influencing_text_1": "To join Vego Garden's Veggie Influencers Program, click the link below and simply fill out the application form.",
+                "start_influencing_text_2": "Once we receive your application, our team will review it within two weeks.",
+                "start_influencing_link": "#",
+                "show_testimonials": true,
+                "testimonials_title": "Hear from Our Influencers",
+                "testimonials_cta_text": "Join Now and Start Growing",
+                "show_bottom_programs": true
+            }
+        }
+    },
+    "order": [
+        "influencer_program"
+    ]
+}

@@ -1,0 +1,1430 @@
+{% comment %}
+  Vego Garden Influencer Program Section
+  Based on the design analysis and wholesale-application structure
+{% endcomment %}
+
+<style>
+/* ===== FONT SIZE UTILITY CLASSES ===== */
+.text-14 { font-size: 14px; }
+.text-16 { font-size: 16px; }
+.text-18 { font-size: 18px; }
+.text-20 { font-size: 20px; }
+.text-24 { font-size: 24px; }
+.text-28 { font-size: 28px; }
+.text-32 { font-size: 32px; }
+.text-36 { font-size: 36px; }
+.text-48 { font-size: 48px; }
+
+/* ===== CSS VARIABLES ===== */
+:root {
+  --primary-green: #89C321;
+  --dark-green: #2B2945;
+  --light-green: #E8F5E8;
+  --cream: #F9F7F4;
+  --text-dark: #2B2945;
+  --text-light: #718793;
+  --white: #FFFFFF;
+  --yellow-accent: #FFD700;
+}
+
+/* ===== HERO SECTION ===== */
+.influencer-hero {
+  position: relative;
+  height: 70vh;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.influencer-hero__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.influencer-hero__background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: none;
+}
+
+.influencer-hero__background img.desktop-image {
+  display: block;
+}
+
+.influencer-hero__background img.mobile-image {
+  display: none;
+}
+
+.influencer-hero__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(43, 41, 69, 0.6);
+  z-index: 2;
+}
+
+.influencer-hero__content {
+  position: relative;
+  z-index: 3;
+  max-width: 900px;
+  padding: 0 20px;
+}
+
+.influencer-hero__title {
+  font-size: 36px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  font-family: serif;
+}
+
+.influencer-hero__subtitle {
+  font-size: 20px;
+  color: white;
+  margin-bottom: 2rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.influencer-hero__cta {
+  display: inline-block;
+  background: var(--yellow-accent);
+  color: var(--text-dark);
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.influencer-hero__cta:hover {
+  background: #FFC107;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* ===== WHY PARTNER WITH MAXLEAD SECTION ===== */
+.influencer-why-partner {
+  padding: 4rem 0;
+  background: var(--cream);
+}
+
+.influencer-why-partner__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.influencer-why-partner__content {
+  display: flex;
+  align-items: flex-start;
+  gap: 3rem;
+}
+
+.influencer-why-partner__left {
+  flex: 0 0 30%;
+  text-align: left;
+}
+
+.influencer-why-partner__right {
+  flex: 0 0 70%;
+}
+
+.influencer-why-partner__title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  font-family: serif;
+  line-height: 1.2;
+}
+
+.influencer-why-partner__description {
+  font-size: 18px;
+  color: var(--text-light);
+  line-height: 1.6;
+}
+
+.influencer-why-partner__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.influencer-benefit {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: left;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.influencer-benefit:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.influencer-benefit__number {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: var(--primary-green);
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.influencer-benefit__icon {
+  width: 60px;
+  height: 60px;
+  margin: 1rem 0 1.5rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.influencer-benefit__icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.influencer-benefit__title {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.influencer-benefit__description {
+  font-size: 16px;
+  color: var(--text-light);
+  line-height: 1.5;
+}
+
+/* ===== WHAT WE OFFER SECTION ===== */
+.influencer-what-we-offer {
+  padding: 4rem 0;
+  background: var(--light-green);
+}
+
+.influencer-what-we-offer__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.influencer-what-we-offer__content h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  font-family: serif;
+}
+
+.influencer-what-we-offer__content p {
+  font-size: 16px;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.influencer-what-we-offer__image {
+  position: relative;
+}
+
+.influencer-what-we-offer__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+/* ===== EXCLUSIVE REWARDS SECTION ===== */
+.influencer-exclusive-rewards {
+  padding: 4rem 0;
+  background: var(--cream);
+}
+
+.influencer-exclusive-rewards__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.influencer-exclusive-rewards__image {
+  position: relative;
+}
+
+.influencer-exclusive-rewards__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+.influencer-exclusive-rewards__content h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  font-family: serif;
+}
+
+.influencer-exclusive-rewards__list {
+  list-style: none;
+  padding: 0;
+}
+
+.influencer-exclusive-rewards__list li {
+  font-size: 16px;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+  position: relative;
+}
+
+.influencer-exclusive-rewards__list li::before {
+  content: "•";
+  color: var(--primary-green);
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* ===== ELIGIBILITY REQUIREMENTS SECTION ===== */
+.influencer-eligibility {
+  padding: 4rem 0;
+  background: var(--light-green);
+}
+
+.influencer-eligibility__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.influencer-eligibility__content h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  font-family: serif;
+}
+
+.influencer-eligibility__list {
+  list-style: none;
+  padding: 0;
+}
+
+.influencer-eligibility__list li {
+  font-size: 16px;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+  position: relative;
+}
+
+.influencer-eligibility__list li::before {
+  content: "•";
+  color: var(--primary-green);
+  font-size: 20px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.influencer-eligibility__image {
+  position: relative;
+}
+
+.influencer-eligibility__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+}
+
+/* ===== HOW IT WORKS SECTION ===== */
+.influencer-how-it-works {
+  padding: 4rem 0;
+  background: var(--cream);
+}
+
+.influencer-how-it-works__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.influencer-how-it-works__image {
+  position: relative;
+}
+
+.influencer-how-it-works__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}
+
+.influencer-how-it-works__content h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  font-family: serif;
+}
+
+.influencer-how-it-works__content p {
+  font-size: 16px;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.influencer-how-it-works__cta {
+  display: inline-block;
+  background: var(--primary-green);
+  color: white;
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.influencer-how-it-works__cta:hover {
+  background: #7AB31E;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ===== START INFLUENCING SECTION ===== */
+.influencer-start {
+  padding: 4rem 0;
+  background: var(--cream);
+  text-align: center;
+}
+
+.influencer-start__container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.influencer-start__title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  font-family: serif;
+}
+
+.influencer-start__content {
+  font-size: 16px;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.influencer-start__button {
+  display: inline-block;
+  background: var(--primary-green);
+  color: white;
+  padding: 16px 32px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.influencer-start__button:hover {
+  background: var(--dark-green);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* ===== TESTIMONIALS SECTION ===== */
+.influencer-testimonials {
+  padding: 4rem 0;
+  background: var(--light-green);
+}
+
+.influencer-testimonials__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.influencer-testimonials__title {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 3rem;
+  font-family: serif;
+}
+
+.influencer-testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 2rem;
+}
+
+.influencer-testimonial {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  text-align: left;
+  position: relative;
+}
+
+.influencer-testimonial__quote {
+  font-size: 60px;
+  color: var(--text-light);
+  position: absolute;
+  top: 10px;
+  left: 20px;
+  opacity: 0.3;
+}
+
+.influencer-testimonial__text {
+  font-size: 16px;
+  color: var(--text-light);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+}
+
+.influencer-testimonial__author {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.influencer-testimonials__cta {
+  display: inline-block;
+  background: var(--yellow-accent);
+  color: var(--text-dark);
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 18px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  margin-top: 2rem;
+}
+
+.influencer-testimonials__cta:hover {
+  background: #FFC107;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* ===== BOTTOM PROGRAMS SECTION ===== */
+.influencer-bottom-programs {
+  padding: 4rem 0;
+  background: var(--dark-green);
+}
+
+.influencer-bottom-programs__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.influencer-bottom-programs__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.influencer-program {
+  text-align: center;
+  color: white;
+}
+
+.influencer-program__image {
+  margin-bottom: 1.5rem;
+}
+
+.influencer-program__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.influencer-program__title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.influencer-program__description {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  opacity: 0.9;
+}
+
+.influencer-program__link {
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.influencer-program__link:hover {
+  text-decoration: underline;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .influencer-hero {
+    height: 60vh;
+    min-height: 400px;
+  }
+  
+  .influencer-hero__background img.desktop-image {
+    display: none;
+  }
+  
+  .influencer-hero__background img.mobile-image {
+    display: block;
+  }
+  
+  .influencer-hero__title {
+    font-size: 28px;
+  }
+  
+  .influencer-hero__subtitle {
+    font-size: 18px;
+  }
+  
+  .influencer-why-partner__content {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .influencer-why-partner__left,
+  .influencer-why-partner__right {
+    flex: none;
+    width: 100%;
+  }
+  
+  .influencer-why-partner__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .influencer-what-we-offer__container,
+  .influencer-exclusive-rewards__container,
+  .influencer-eligibility__container,
+  .influencer-how-it-works__container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .influencer-testimonials__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .influencer-bottom-programs__grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .influencer-why-join,
+  .influencer-what-we-offer,
+  .influencer-exclusive-rewards,
+  .influencer-eligibility,
+  .influencer-meet-grove,
+  .influencer-start,
+  .influencer-testimonials,
+  .influencer-bottom-programs {
+    padding: 3rem 0;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .influencer-why-partner__content {
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+  
+  .influencer-why-partner__left,
+  .influencer-why-partner__right {
+    flex: none;
+    width: 100%;
+  }
+  
+  .influencer-why-partner__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .influencer-testimonials__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .influencer-hero__title {
+    font-size: 48px;
+  }
+  
+  .influencer-why-partner__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
+
+<!-- HERO SECTION -->
+{% if section.settings.show_hero %}
+<div class="influencer-hero">
+  <div class="influencer-hero__background">
+    {% if section.settings.hero_background_image %}
+      <img src="{{ section.settings.hero_background_image | img_url: 'master' }}" 
+           alt="{{ section.settings.hero_title }}"
+           loading="lazy"
+           class="desktop-image">
+    {% endif %}
+    
+    {% if section.settings.hero_mobile_image %}
+      <img src="{{ section.settings.hero_mobile_image | img_url: '768x400' }}" 
+           alt="{{ section.settings.hero_title }}"
+           loading="lazy"
+           class="mobile-image">
+    {% elsif section.settings.hero_background_image %}
+      <img src="{{ section.settings.hero_background_image | img_url: '768x400' }}" 
+           alt="{{ section.settings.hero_title }}"
+           loading="lazy"
+           class="mobile-image">
+    {% endif %}
+  </div>
+  
+  <div class="influencer-hero__overlay"></div>
+  
+  <div class="influencer-hero__content">
+    <h1 class="influencer-hero__title">{{ section.settings.hero_title }}</h1>
+    <p class="influencer-hero__subtitle">{{ section.settings.hero_subtitle }}</p>
+    
+    {% if section.settings.hero_cta_text %}
+      <button type="button" id="join-now-btn" class="influencer-hero__cta">
+        {{ section.settings.hero_cta_text }}
+      </button>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+<!-- WHY PARTNER WITH MAXLEAD SECTION -->
+{% if section.settings.show_why_join %}
+<div class="influencer-why-partner">
+  <div class="influencer-why-partner__container">
+    <div class="influencer-why-partner__content">
+      <!-- Left side - Title and Text (30%) -->
+      <div class="influencer-why-partner__left">
+        <h2 class="influencer-why-partner__title">{{ section.settings.why_join_title | default: 'Why Partner with MaxLead' }}</h2>
+        <p class="influencer-why-partner__description">{{ section.settings.why_join_subtitle | default: 'Join our network of successful partners and grow your business with MaxLead' }}</p>
+      </div>
+      
+      <!-- Right side - Benefits Grid (70%) -->
+      <div class="influencer-why-partner__right">
+        <div class="influencer-why-partner__grid">
+          {% for block in section.blocks %}
+            {% case block.type %}
+              {% when 'benefit_item' %}
+                <div class="influencer-benefit" {{ block.shopify_attributes }}>
+                  <div class="influencer-benefit__number">0{{ forloop.index }}</div>
+                  
+                  {% if block.settings.icon %}
+                    <div class="influencer-benefit__icon">
+                      <img src="{{ block.settings.icon | img_url: '200x200' }}" 
+                           alt="{{ block.settings.title }}"
+                           loading="lazy">
+                    </div>
+                  {% endif %}
+                  
+                  <h3 class="influencer-benefit__title">{{ block.settings.title }}</h3>
+                  
+                  {% if block.settings.description %}
+                    <p class="influencer-benefit__description">{{ block.settings.description }}</p>
+                  {% endif %}
+                </div>
+            {% endcase %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- WHAT WE OFFER SECTION -->
+{% if section.settings.show_what_we_offer %}
+<div class="influencer-what-we-offer">
+  <div class="influencer-what-we-offer__container">
+    {% if section.settings.what_we_offer_image %}
+      <div class="influencer-what-we-offer__image">
+        <img src="{{ section.settings.what_we_offer_image | img_url: '800x600' }}" 
+             alt="What We Offer"
+             loading="lazy">
+      </div>
+    {% endif %}
+    
+    <div class="influencer-what-we-offer__content">
+      <h2>{{ section.settings.what_we_offer_title }}</h2>
+      <p>{{ section.settings.what_we_offer_text_1 }}</p>
+      <p>{{ section.settings.what_we_offer_text_2 }}</p>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- EXCLUSIVE REWARDS SECTION -->
+{% if section.settings.show_exclusive_rewards %}
+<div class="influencer-exclusive-rewards">
+  <div class="influencer-exclusive-rewards__container">
+    {% if section.settings.exclusive_rewards_image %}
+      <div class="influencer-exclusive-rewards__image">
+        <img src="{{ section.settings.exclusive_rewards_image | img_url: '800x600' }}" 
+             alt="Exclusive Rewards"
+             loading="lazy">
+      </div>
+    {% endif %}
+    
+    <div class="influencer-exclusive-rewards__content">
+      <h2>{{ section.settings.exclusive_rewards_title }}</h2>
+      <ul class="influencer-exclusive-rewards__list">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'reward_item' %}
+              <li>{{ block.settings.reward_text }}</li>
+          {% endcase %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- ELIGIBILITY REQUIREMENTS SECTION -->
+{% if section.settings.show_eligibility %}
+<div class="influencer-eligibility">
+  <div class="influencer-eligibility__container">
+    {% if section.settings.eligibility_image %}
+      <div class="influencer-eligibility__image">
+        <img src="{{ section.settings.eligibility_image | img_url: '800x600' }}" 
+             alt="Eligibility Requirements"
+             loading="lazy">
+      </div>
+    {% endif %}
+    
+    <div class="influencer-eligibility__content">
+      <h2>{{ section.settings.eligibility_title }}</h2>
+      <ul class="influencer-eligibility__list">
+        {% for block in section.blocks %}
+          {% case block.type %}
+            {% when 'requirement_item' %}
+              <li>{{ block.settings.requirement_text }}</li>
+          {% endcase %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- HOW IT WORKS SECTION -->
+{% if section.settings.show_meet_grove %}
+<div class="influencer-how-it-works">
+  <div class="influencer-how-it-works__container">
+    {% if section.settings.meet_grove_image %}
+      <div class="influencer-how-it-works__image">
+        <img src="{{ section.settings.meet_grove_image | img_url: '800x600' }}" 
+             alt="How It Works"
+             loading="lazy">
+      </div>
+    {% endif %}
+    
+    <div class="influencer-how-it-works__content">
+      <h2>{{ section.settings.meet_grove_title | default: 'How It Works' }}</h2>
+      <p>{{ section.settings.meet_grove_text_1 | default: 'Our partnership process is simple and straightforward.'}}</p>
+      <p>{{ section.settings.meet_grove_text_2 | default: 'Join thousands of successful partners who have grown their business with our proven strategies and support.' }}</p>
+      
+      {% if section.settings.meet_grove_cta_text %}
+        <a href="{{ section.settings.meet_grove_cta_link }}" class="influencer-how-it-works__cta">
+          {{ section.settings.meet_grove_cta_text }}
+        </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- START INFLUENCING SECTION -->
+{% if section.settings.show_start_influencing %}
+<div class="influencer-start">
+  <div class="influencer-start__container">
+    <h2 class="influencer-start__title">{{ section.settings.start_influencing_title }}</h2>
+    <div class="influencer-start__content">
+      <p>{{ section.settings.start_influencing_text_1 }}</p>
+      <p>{{ section.settings.start_influencing_text_2 }}</p>
+      <a href="{{ section.settings.start_influencing_link }}" class="influencer-start__button" target="_blank">Apply to Become an Influencer</a>
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- TESTIMONIALS SECTION -->
+{% if section.settings.show_testimonials %}
+<div class="influencer-testimonials">
+  <div class="influencer-testimonials__container">
+    <h2 class="influencer-testimonials__title">{{ section.settings.testimonials_title }}</h2>
+    
+    <div class="influencer-testimonials__grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'testimonial_item' %}
+            <div class="influencer-testimonial" {{ block.shopify_attributes }}>
+              <div class="influencer-testimonial__quote">"</div>
+              <p class="influencer-testimonial__text">{{ block.settings.testimonial_text }}</p>
+              <div class="influencer-testimonial__author">{{ block.settings.testimonial_author }}</div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+    
+    {% if section.settings.testimonials_cta_text %}
+      <button type="button" id="join-now-bottom-btn" class="influencer-testimonials__cta">
+        {{ section.settings.testimonials_cta_text }}
+      </button>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+<!-- BOTTOM PROGRAMS SECTION -->
+{% if section.settings.show_bottom_programs %}
+<div class="influencer-bottom-programs">
+  <div class="influencer-bottom-programs__container">
+    <div class="influencer-bottom-programs__grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'program_item' %}
+            <div class="influencer-program" {{ block.shopify_attributes }}>
+              {% if block.settings.program_image %}
+                <div class="influencer-program__image">
+                  <img src="{{ block.settings.program_image | img_url: '400x300' }}" 
+                       alt="{{ block.settings.program_title }}"
+                       loading="lazy">
+                </div>
+              {% endif %}
+              
+              <h3 class="influencer-program__title">{{ block.settings.program_title }}</h3>
+              <p class="influencer-program__description">{{ block.settings.program_description }}</p>
+              
+              {% if block.settings.program_link %}
+                <a href="{{ block.settings.program_link }}" class="influencer-program__link">
+                  {{ block.settings.program_link_text }}
+                </a>
+              {% endif %}
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Handle join now button clicks
+  const joinNowBtn = document.getElementById('join-now-btn');
+  const joinNowBottomBtn = document.getElementById('join-now-bottom-btn');
+  
+  function scrollToApplication() {
+    // Scroll to the start influencing section or application form
+    const startSection = document.querySelector('.influencer-start');
+    if (startSection) {
+      startSection.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    }
+  }
+  
+  if (joinNowBtn) {
+    joinNowBtn.addEventListener('click', scrollToApplication);
+  }
+  
+  if (joinNowBottomBtn) {
+    joinNowBottomBtn.addEventListener('click', scrollToApplication);
+  }
+});
+</script>
+
+{% schema %}
+{
+  "name": "Influencer Program",
+  "max_blocks": 30,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero",
+      "label": "Show Hero Section",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_background_image",
+      "label": "Hero Background Image (Desktop)",
+      "info": "Recommended size: 1920x800px"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_mobile_image",
+      "label": "Hero Background Image (Mobile)",
+      "info": "Recommended size: 768x400px"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "Welcome to Vego Garden's Veggie Influencers Program!"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_subtitle",
+      "label": "Hero Subtitle",
+      "default": "Join us, and let's inspire sustainable gardening & encourage gardening to more audiences!"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_text",
+      "label": "Hero CTA Button Text",
+      "default": "Join Now and Start Growing"
+    },
+    {
+      "type": "header",
+      "content": "Why Join Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_why_join",
+      "label": "Show Why Join Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "why_join_title",
+      "label": "Why Join Title",
+      "default": "Why Join?"
+    },
+    {
+      "type": "text",
+      "id": "why_join_subtitle",
+      "label": "Why Join Subtitle",
+      "default": "Perks and Rewards"
+    },
+    {
+      "type": "header",
+      "content": "What We Offer Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_what_we_offer",
+      "label": "Show What We Offer Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "what_we_offer_title",
+      "label": "What We Offer Title",
+      "default": "What We Offer"
+    },
+    {
+      "type": "textarea",
+      "id": "what_we_offer_text_1",
+      "label": "What We Offer Text 1",
+      "default": "At Vego Garden, we believe that everyone deserves access to healthy and sustainable food. Our Veggie Influencers Program is designed for passionate influencers who share our values and want to inspire others to live a healthier, more sustainable lifestyle."
+    },
+    {
+      "type": "textarea",
+      "id": "what_we_offer_text_2",
+      "label": "What We Offer Text 2",
+      "default": "By joining our program, you'll have the opportunity to collaborate with us on exciting campaigns and projects while learning about sustainable gardening practices."
+    },
+    {
+      "type": "image_picker",
+      "id": "what_we_offer_image",
+      "label": "What We Offer Image",
+      "info": "Recommended size: 800x600px"
+    },
+    {
+      "type": "header",
+      "content": "Exclusive Rewards Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_exclusive_rewards",
+      "label": "Show Exclusive Rewards Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "exclusive_rewards_title",
+      "label": "Exclusive Rewards Title",
+      "default": "Exclusive Rewards"
+    },
+    {
+      "type": "image_picker",
+      "id": "exclusive_rewards_image",
+      "label": "Exclusive Rewards Image",
+      "info": "Recommended size: 800x600px"
+    },
+    {
+      "type": "header",
+      "content": "Eligibility Requirements Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_eligibility",
+      "label": "Show Eligibility Requirements Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "eligibility_title",
+      "label": "Eligibility Requirements Title",
+      "default": "Eligibility Requirements"
+    },
+    {
+      "type": "image_picker",
+      "id": "eligibility_image",
+      "label": "Eligibility Requirements Image",
+      "info": "Recommended size: 800x600px"
+    },
+    {
+      "type": "header",
+      "content": "Meet the Grove Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_meet_grove",
+      "label": "Show Meet the Grove Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "meet_grove_title",
+      "label": "Meet the Grove Title",
+      "default": "Meet the Vego Garden Grove: Our Brand Ambassadors"
+    },
+    {
+      "type": "textarea",
+      "id": "meet_grove_text_1",
+      "label": "Meet the Grove Text 1",
+      "default": "We have handpicked a select group of influencers to represent Vego as Brand Ambassadors in our Vego Garden Grove, where they enjoy even more exciting benefits, base pay, and a close connection with the best team in the industry!"
+    },
+    {
+      "type": "textarea",
+      "id": "meet_grove_text_2",
+      "label": "Meet the Grove Text 2",
+      "default": "Our Vego Garden Grove is a vibrant community of inspiring Brand Ambassadors—gardeners, farmers, educators, and nature enthusiasts—who have successfully partnered with us to spread the joy and benefits of gardening."
+    },
+    {
+      "type": "image_picker",
+      "id": "meet_grove_image",
+      "label": "Meet the Grove Image",
+      "info": "Recommended size: 800x600px"
+    },
+    {
+      "type": "text",
+      "id": "meet_grove_cta_text",
+      "label": "Meet the Grove CTA Text",
+      "default": "Let's Meet Our Ambassadors!"
+    },
+    {
+      "type": "url",
+      "id": "meet_grove_cta_link",
+      "label": "Meet the Grove CTA Link"
+    },
+    {
+      "type": "header",
+      "content": "Start Influencing Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_start_influencing",
+      "label": "Show Start Influencing Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "start_influencing_title",
+      "label": "Start Influencing Title",
+      "default": "Start Influencing with Vego"
+    },
+    {
+      "type": "textarea",
+      "id": "start_influencing_text_1",
+      "label": "Start Influencing Text 1",
+      "default": "To join Vego Garden's Veggie Influencers Program, click the link below and simply fill out the application form."
+    },
+    {
+      "type": "textarea",
+      "id": "start_influencing_text_2",
+      "label": "Start Influencing Text 2",
+      "default": "Once we receive your application, our team will review it within two weeks."
+    },
+    {
+      "type": "url",
+      "id": "start_influencing_link",
+      "label": "Application Link"
+    },
+    {
+      "type": "header",
+      "content": "Testimonials Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_testimonials",
+      "label": "Show Testimonials Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "testimonials_title",
+      "label": "Testimonials Title",
+      "default": "Hear from Our Influencers"
+    },
+    {
+      "type": "text",
+      "id": "testimonials_cta_text",
+      "label": "Testimonials CTA Text",
+      "default": "Join Now and Start Growing"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Programs Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_bottom_programs",
+      "label": "Show Bottom Programs Section",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit_item",
+      "name": "Benefit Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon",
+          "info": "Recommended size: 200x200px"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Benefit Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Brief description of this benefit"
+        }
+      ]
+    },
+    {
+      "type": "reward_item",
+      "name": "Reward Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "reward_text",
+          "label": "Reward Text",
+          "default": "Reward description"
+        }
+      ]
+    },
+    {
+      "type": "requirement_item",
+      "name": "Requirement Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "requirement_text",
+          "label": "Requirement Text",
+          "default": "Requirement description"
+        }
+      ]
+    },
+    {
+      "type": "testimonial_item",
+      "name": "Testimonial Item",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "testimonial_text",
+          "label": "Testimonial Text",
+          "default": "Testimonial text here"
+        },
+        {
+          "type": "text",
+          "id": "testimonial_author",
+          "label": "Testimonial Author",
+          "default": "Author Name"
+        }
+      ]
+    },
+    {
+      "type": "program_item",
+      "name": "Program Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "program_image",
+          "label": "Program Image",
+          "info": "Recommended size: 400x300px"
+        },
+        {
+          "type": "text",
+          "id": "program_title",
+          "label": "Program Title",
+          "default": "Program Title"
+        },
+        {
+          "type": "textarea",
+          "id": "program_description",
+          "label": "Program Description",
+          "default": "Program description"
+        },
+        {
+          "type": "url",
+          "id": "program_link",
+          "label": "Program Link"
+        },
+        {
+          "type": "text",
+          "id": "program_link_text",
+          "label": "Program Link Text",
+          "default": "Learn More >"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Influencer Program",
+      "blocks": [
+        {
+          "type": "benefit_item"
+        },
+        {
+          "type": "benefit_item"
+        },
+        {
+          "type": "benefit_item"
+        },
+        {
+          "type": "reward_item"
+        },
+        {
+          "type": "reward_item"
+        },
+        {
+          "type": "reward_item"
+        },
+        {
+          "type": "reward_item"
+        },
+        {
+          "type": "reward_item"
+        },
+        {
+          "type": "requirement_item"
+        },
+        {
+          "type": "requirement_item"
+        },
+        {
+          "type": "requirement_item"
+        },
+        {
+          "type": "testimonial_item"
+        },
+        {
+          "type": "testimonial_item"
+        },
+        {
+          "type": "program_item"
+        },
+        {
+          "type": "program_item"
+        },
+        {
+          "type": "program_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

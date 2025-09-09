@@ -1,0 +1,846 @@
+{% comment %}
+  Wholesale Application Combined Section
+  All sections combined into one file for easier management
+{% endcomment %}
+
+<style>
+/* ===== FONT SIZE UTILITY CLASSES ===== */
+.text-14 {
+  font-size: 14px;
+}
+
+.text-16 {
+  font-size: 16px;
+}
+
+.text-24 {
+  font-size: 24px;
+}
+
+.text-28 {
+  font-size: 28px;
+}
+
+/* ===== HERO BANNER STYLES ===== */
+.wholesale-hero {
+  position: relative;
+  height: 60vh;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.wholesale-hero__background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+ .wholesale-hero__background img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: center;
+   display: none;
+ }
+ 
+ .wholesale-hero__background img.desktop-image {
+   display: block;
+ }
+ 
+ .wholesale-hero__background img.mobile-image {
+   display: none;
+ }
+
+.wholesale-hero__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+.wholesale-hero__content {
+  position: relative;
+  z-index: 3;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.wholesale-hero__title {
+  font-size: 48px; /* Mobile default */
+  font-weight: 700;
+  color: white;
+  margin-bottom: 2rem;
+  line-height: 1.2;
+}
+
+/* PC端Hero Title字体大小 */
+@media (min-width: 1025px) {
+  .wholesale-hero__title {
+    font-size: 48px;
+  }
+}
+
+.wholesale-hero__cta {
+  display: inline-block;
+  background: #8cc63f;
+  color: white;
+  padding: 15px 30px;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: 600;
+  /* font-size removed - will be controlled by utility classes */
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.wholesale-hero__cta:hover {
+  background: #7ab52e;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* ===== WHOLESALE FORM STYLES ===== */
+
+.wholesale-form-hidden {
+  display: none;
+}
+
+.wholesale-form-visible {
+  display: block;
+}
+
+/* Hide the entire form section by default */
+#wholesale-form-section.wholesale-form-hidden {
+  display: none;
+}
+
+#wholesale-form-section.wholesale-form-visible {
+  display: block;
+}
+
+/* ===== ADVANTAGES STYLES ===== */
+.wholesale-advantages {
+  padding: 4rem 0;
+  background: white;
+}
+
+.wholesale-advantages__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.wholesale-advantages__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.wholesale-advantage {
+  text-align: center;
+  padding: 2rem 1rem;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  background: #f8f9fa;
+}
+
+.wholesale-advantage:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  background: white;
+}
+
+.wholesale-advantage__icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wholesale-advantage__icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.wholesale-advantage__title {
+  /* font-size removed - will be controlled by utility classes */
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+}
+
+.wholesale-advantage__description {
+  /* font-size removed - will be controlled by utility classes */
+  color: #7f8c8d;
+  line-height: 1.5;
+}
+
+/* ===== HOW TO JOIN STYLES ===== */
+.wholesale-how-to-join {
+  padding: 4rem 0 2rem 0;
+  background: #f8f9fa;
+}
+
+.wholesale-how-to-join__container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.wholesale-how-to-join__title {
+  text-align: center;
+  /* font-size removed - will be controlled by utility classes */
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 3rem;
+}
+
+.wholesale-how-to-join__title .highlight {
+  color: #8cc63f;
+}
+
+.wholesale-how-to-join__subtitle {
+  text-align: center;
+  /* font-size removed - will be controlled by utility classes */
+  color: #7f8c8d;
+  margin-top: 0.5rem;
+  margin-bottom: 4rem;
+  font-weight: 400;
+}
+
+ .wholesale-how-to-join__grid {
+   display: grid;
+   grid-template-columns: repeat(4, 1fr);
+   gap: 2rem;
+   width: 100%;
+   max-width: 100%;
+ }
+
+.wholesale-step {
+  background: white;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.wholesale-step:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+}
+
+.wholesale-step__image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.wholesale-step__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.3s ease;
+}
+
+.wholesale-step:hover .wholesale-step__image img {
+  transform: scale(1.05);
+}
+
+.wholesale-step__content {
+  padding: 1.5rem;
+}
+
+
+
+.wholesale-step__text {
+  /* font-size removed - will be controlled by utility classes */
+  color: #2c3e50;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===== FAQ STYLES ===== */
+.wholesale-faq {
+  padding: 4rem 0;
+  background: white;
+}
+
+.wholesale-faq__container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.wholesale-faq__title {
+  text-align: center;
+  /* font-size removed - will be controlled by utility classes */
+  font-weight: 700;
+  color: #2c3e50;
+  margin-bottom: 3rem;
+}
+
+.wholesale-faq__title .highlight {
+  color: #8cc63f;
+}
+
+.wholesale-faq__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.wholesale-faq__item {
+  background: white;
+  border: 1px solid #e1e8ed;
+  border-radius: 10px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.wholesale-faq__item:hover {
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.wholesale-faq__question {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 1rem;
+}
+
+.wholesale-faq__question-label {
+  background: #f8f9fa;
+  color: #6c757d;
+  font-weight: 600;
+  /* font-size removed - will be controlled by utility classes */
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+  min-width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.wholesale-faq__question-text {
+  /* font-size removed - will be controlled by utility classes */
+  font-weight: 600;
+  color: #2c3e50;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.wholesale-faq__answer {
+  display: flex;
+  align-items: baseline;
+}
+
+.wholesale-faq__answer-label {
+  background: #f8f9fa;
+  color: #6c757d;
+  font-weight: 600;
+  /* font-size removed - will be controlled by utility classes */
+  padding: 0.4rem 0.6rem;
+  border-radius: 4px;
+  margin-right: 0.75rem;
+  min-width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.wholesale-faq__answer-text {
+  /* font-size removed - will be controlled by utility classes */
+  color: #7f8c8d;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+ @media (max-width: 768px) {
+   .wholesale-hero {
+     height: 50vh;
+     min-height: 300px;
+   }
+   
+   .wholesale-hero__background img.desktop-image {
+     display: none;
+   }
+   
+   .wholesale-hero__background img.mobile-image {
+     display: block;
+   }
+  
+  .wholesale-hero__content {
+    padding: 0 15px;
+  }
+  
+  .wholesale-hero__cta {
+    padding: 12px 25px;
+    /* font-size removed - will be controlled by utility classes */
+  }
+  
+  .wholesale-advantages,
+  .wholesale-how-to-join,
+  .wholesale-form-section,
+  .wholesale-faq {
+    padding: 3rem 0;
+  }
+  
+  .wholesale-advantages__container,
+  .wholesale-how-to-join__container,
+  .wholesale-faq__container {
+    padding: 0 15px;
+  }
+  
+  .wholesale-advantages__grid,
+  .wholesale-how-to-join__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .wholesale-advantage,
+  .wholesale-step {
+    padding: 1.5rem 1rem;
+  }
+  
+  .wholesale-advantage__icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 1rem;
+  }
+  
+  .wholesale-advantage__title {
+    /* font-size removed - will be controlled by utility classes */
+  }
+  
+  .wholesale-step__image {
+    height: 180px;
+  }
+  
+  .wholesale-step__content {
+    padding: 1.25rem;
+  }
+  
+  .wholesale-faq__grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .wholesale-faq__item {
+    padding: 1.5rem;
+  }
+  
+  /* 表单手机端自适应样式 */
+ @media (min-width: 769px) and (max-width: 1024px) {
+   .wholesale-advantages__grid {
+     grid-template-columns: repeat(2, 1fr);
+   }
+   
+   .wholesale-how-to-join__grid {
+     grid-template-columns: repeat(2, 1fr);
+   }
+ }
+ 
+ @media (min-width: 1025px) {
+   .wholesale-how-to-join__grid {
+     grid-template-columns: repeat(4, 1fr);
+   }
+ }
+</style>
+
+<!-- HERO BANNER SECTION -->
+{% if section.settings.show_hero %}
+<div class="wholesale-hero">
+  <div class="wholesale-hero__background">
+    {% if section.settings.hero_background_image %}
+      <img src="{{ section.settings.hero_background_image | img_url: 'master' }}" 
+           alt="{{ section.settings.hero_title }}"
+           loading="lazy"
+           class="desktop-image">
+    {% endif %}
+    
+    {% if section.settings.hero_mobile_image %}
+      <img src="{{ section.settings.hero_mobile_image | img_url: '768x400' }}" 
+           alt="{{ section.settings.hero_title }}"
+           loading="lazy"
+           class="mobile-image">
+    {% elsif section.settings.hero_background_image %}
+      <img src="{{ section.settings.hero_background_image | img_url: '768x400' }}" 
+           alt="{{ section.settings.hero_title }}"
+           loading="lazy"
+           class="mobile-image">
+    {% endif %}
+  </div>
+  
+  <div class="wholesale-hero__overlay"></div>
+  
+  <div class="wholesale-hero__content">
+    <h1 class="wholesale-hero__title">{{ section.settings.hero_title }}</h1>
+    
+    {% if section.settings.hero_cta_text %}
+      <button type="button" id="get-started-btn" class="wholesale-hero__cta text-24">
+        {{ section.settings.hero_cta_text }}
+      </button>
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+
+
+
+<!-- ADVANTAGES SECTION -->
+{% if section.settings.show_advantages %}
+<div class="wholesale-advantages">
+  <div class="wholesale-advantages__container">
+    <div class="wholesale-advantages__grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'advantage_item' %}
+            <div class="wholesale-advantage" {{ block.shopify_attributes }}>
+              {% if block.settings.icon %}
+                <div class="wholesale-advantage__icon">
+                  <img src="{{ block.settings.icon | img_url: '200x200' }}" 
+                       alt="{{ block.settings.title }}"
+                       loading="lazy">
+                </div>
+              {% endif %}
+              
+              <h3 class="wholesale-advantage__title text-16">{{ block.settings.title }}</h3>
+              
+              {% if block.settings.description %}
+                <p class="wholesale-advantage__description">{{ block.settings.description }}</p>
+              {% endif %}
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- HOW TO JOIN SECTION -->
+{% if section.settings.show_how_to_join %}
+<div class="wholesale-how-to-join">
+  <div class="wholesale-how-to-join__container">
+    <h2 class="wholesale-how-to-join__title text-28">
+  {{ section.settings.how_to_get_started_title | replace: 'How to Get Started?', '<span class="highlight">H</span>ow to Get Started?' }}
+</h2>
+    <p class="wholesale-how-to-join__subtitle">Get Your Business Account in 3 Easy Steps</p>
+    
+    <div class="wholesale-how-to-join__grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'step_item' %}
+            <div class="wholesale-step" {{ block.shopify_attributes }}>
+              {% if block.settings.step_image %}
+                <div class="wholesale-step__image">
+                  <img src="{{ block.settings.step_image | img_url: '600x400' }}" 
+                       alt="Step {{ forloop.index }}"
+                       loading="lazy">
+                </div>
+              {% endif %}
+              
+              <div class="wholesale-step__content">
+                <p class="wholesale-step__text text-16">{{ block.settings.step_text }}</p>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+<!-- WHOLESALE FORM SECTION -->
+{% if section.settings.show_wholesale_form %}
+<div class="wholesale-form-hidden" id="wholesale-form-section">
+    <iframe
+      id="JotFormIFrame-252381698862471"
+      title="Apply for Your Wholesale Account Today"
+      onload="window.parent.scrollTo(0,0)"
+      allowtransparency="true"
+      allow="geolocation; microphone; camera; fullscreen; payment"
+      src="https://form.jotform.com/252381698862471"
+      frameborder="0"
+      style="min-width:100%;max-width:100%;height:539px;border:none;"
+      scrolling="no"
+    >
+    </iframe>
+    <script src='https://cdn.jotfor.ms/s/umd/latest/for-form-embed-handler.js'></script>
+    <script>window.jotformEmbedHandler("iframe[id='JotFormIFrame-252381698862471']", "https://form.jotform.com/")</script>
+</div>
+{% endif %}
+
+<!-- FAQ SECTION -->
+{% if section.settings.show_faq %}
+<div class="wholesale-faq">
+  <div class="wholesale-faq__container">
+    <h2 class="wholesale-faq__title text-28">
+      {{ section.settings.faq_title | replace: 'FAQ', 'F<span class="highlight">A</span>Q' }}
+    </h2>
+    
+    <div class="wholesale-faq__grid">
+      {% for block in section.blocks %}
+        {% case block.type %}
+          {% when 'faq_item' %}
+            <div class="wholesale-faq__item" {{ block.shopify_attributes }}>
+              <div class="wholesale-faq__question">
+                <div class="wholesale-faq__question-label">Q</div>
+                <div class="wholesale-faq__question-text text-14">{{ block.settings.question }}</div>
+              </div>
+              <div class="wholesale-faq__answer">
+                <div class="wholesale-faq__answer-label">A</div>
+                <div class="wholesale-faq__answer-text text-14">{{ block.settings.answer }}</div>
+              </div>
+            </div>
+        {% endcase %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+
+
+
+{% schema %}
+{
+  "name": "Wholesale Application",
+  "max_blocks": 20,
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Banner Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero",
+      "label": "Show Hero Banner",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_background_image",
+      "label": "Hero Background Image (Desktop)",
+      "info": "Recommended size: 1920x800px"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_mobile_image",
+      "label": "Hero Background Image (Mobile)",
+      "info": "Recommended size: 768x400px. If not set, desktop image will be used."
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero Title",
+      "default": "Advantages as a B2B customer"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta_text",
+      "label": "CTA Button Text",
+      "default": "Get Started"
+    },
+    {
+      "type": "header",
+      "content": "Wholesale Form Settings"
+    },
+         {
+       "type": "checkbox",
+       "id": "show_wholesale_form",
+       "label": "Show Wholesale Application Form",
+       "default": true
+     },
+    {
+      "type": "header",
+      "content": "Advantages Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_advantages",
+      "label": "Show Advantages Section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "How to Join Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_how_to_join",
+      "label": "Show How to Join Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "how_to_get_started_title",
+      "label": "How to Get Started Title",
+      "default": "How to Get Started?"
+    },
+    {
+      "type": "header",
+      "content": "FAQ Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_faq",
+      "label": "Show FAQ Section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "faq_title",
+      "label": "FAQ Title",
+      "default": "FAQ"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "advantage_item",
+      "name": "Advantage Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon",
+          "info": "Recommended size: 200x200px"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Advantage Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Brief description of this advantage"
+        }
+      ]
+    },
+    {
+      "type": "step_item",
+      "name": "Step Item",
+      "settings": [
+                 {
+           "type": "image_picker",
+           "id": "step_image",
+           "label": "Step Image",
+           "info": "Recommended size: 385x240px"
+         },
+        {
+          "type": "textarea",
+          "id": "step_text",
+          "label": "Step Description",
+          "default": "Description of this step"
+        }
+      ]
+    },
+    {
+      "type": "faq_item",
+      "name": "FAQ Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question",
+          "default": "Frequently asked question?"
+        },
+        {
+          "type": "textarea",
+          "id": "answer",
+          "label": "Answer",
+          "default": "Answer to the frequently asked question."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Wholesale Application",
+      "blocks": [
+        {
+          "type": "advantage_item"
+        },
+        {
+          "type": "advantage_item"
+        },
+        {
+          "type": "advantage_item"
+        },
+        {
+          "type": "advantage_item"
+        },
+        {
+          "type": "step_item"
+        },
+        {
+          "type": "step_item"
+        },
+        {
+          "type": "step_item"
+        },
+        {
+          "type": "step_item"
+        },
+        {
+          "type": "faq_item"
+        },
+        {
+          "type": "faq_item"
+        },
+        {
+          "type": "faq_item"
+        },
+        {
+          "type": "faq_item"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Get the Get Started button and form section
+  const getStartedBtn = document.getElementById('get-started-btn');
+  const formSection = document.getElementById('wholesale-form-section');
+  
+  if (getStartedBtn && formSection) {
+    // Add click event listener to the Get Started button
+    getStartedBtn.addEventListener('click', function() {
+      // Show the entire form section
+      formSection.classList.remove('wholesale-form-hidden');
+      formSection.classList.add('wholesale-form-visible');
+      
+      // Smooth scroll to the form section
+      formSection.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'start' 
+      });
+    });
+  }
+  
+  // Note: Form submission is now handled by JotForm iframe
+  // The iframe will handle all form functionality automatically
+});
+</script> 

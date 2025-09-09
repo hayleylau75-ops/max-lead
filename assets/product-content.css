@@ -1,0 +1,195 @@
+.card {
+    background: var(--bg-color);
+    border-radius: var(--input-border-radius);
+    overflow: hidden;
+}
+
+.card__collapsible-button {
+    position: relative;
+    padding: 15px 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    width: 100%;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.card__collapsible-button .disclosure__toggle {
+    margin-left: 10px;
+    color: var(--heading-color);
+}
+
+.card__collapsible {
+    height: 0;
+    overflow: hidden;
+    transition: 0.3s ease-in-out;
+}
+
+.card__collapsible-content {
+    padding: 15px 30px;
+}
+
+/* 移除不再需要的plus-button相关样式 */
+
+/* 产品内容区域的样式 */
+.product-content-section:not(.product-content-reviews-container .product-content-section) {
+    width: 100%;
+    position: relative;
+    margin-top: 30px;
+    padding-top: 30px;
+    border-top: 1px solid rgba(var(--text-color)/0.15);
+}
+
+.product-content-section .container {
+    padding: 0;
+}
+
+.product-content-collapse {
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(var(--text-color)/0.15);
+}
+
+.product-content-collapse:last-child {
+    border-bottom: none;
+}
+
+.product-content-collapse .card__collapsible-button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left;
+    padding: 15px 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.product-content-collapse .card__title {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.product-content-collapse .card__title img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.product-content-collapse .card__collapsible {
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
+}
+
+.product-content-collapse .card__collapsible-content {
+    padding: 0 0 15px;
+}
+
+.product-content-collapse .rte {
+    margin: 0;
+}
+
+.product-content-collapse .disclosure__toggle {
+    display: flex;
+}
+
+.product-content-collapse .disclosure__toggle .icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* guide按钮样式 */
+.product-content-button {
+    display: inline-flex;
+    height: 40px;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #00bbd9;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    width: 200px;
+    margin: 10px 0;
+    border: none;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.product-content-button:hover {
+    background-color: #0099b3;
+    color: #fff;
+}
+
+.product-content-button .icon {
+    width: 20px;
+    height: 20px;
+}
+
+/* 视频弹窗样式 */
+.popshow_bigImgBox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popshow_bigImg_content {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    margin: auto;
+}
+
+.popshow_bigImg_iframe {
+    position: relative;
+    padding-bottom: 56.25%;
+    /* 16:9 比例 */
+    width: 100%;
+}
+
+.popshow_bigImg_iframe iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* 当弹窗打开时禁止滚动 */
+body.popshow {
+    overflow: hidden;
+}
+
+@media screen and (max-width: 767px) {
+    .product-content-section {
+        margin-top: 20px;
+        padding-top: 20px;
+    }
+
+    .product-content-collapse .card__title {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .product-content-button {
+        width: 100%;
+        margin: 5px 0;
+    }
+}

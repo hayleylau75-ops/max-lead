@@ -1,0 +1,245 @@
+.product-main:has(custom-select.is-open) {
+  position: relative;
+  z-index: 4;
+}
+
+/* 面包屑导航样式 */
+.product-breadcrumbs {
+  margin-bottom: 20px;
+  padding-top: 20px;
+}
+
+.product-breadcrumbs .breadcrumbs {
+  width: 100%;
+  font-size: 16px;
+  /* 增加面包屑字体大小 */
+}
+
+.product-breadcrumbs .breadcrumbs-list__link {
+  font-size: 16px;
+  /* 增加链接字体大小 */
+  white-space: nowrap;
+  /* 修改为不换行 */
+  overflow: visible;
+  /* 确保内容可见 */
+  text-overflow: initial;
+  /* 不截断文本 */
+}
+
+/* 修复面包屑列表项样式，确保标题可以完整显示 */
+.product-breadcrumbs .breadcrumbs-list li {
+  display: flex;
+  align-items: center;
+  max-width: 100%;
+}
+
+/* 确保最后一个面包屑项（产品标题）可以完整显示 */
+.product-breadcrumbs .breadcrumbs-list li:last-child {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .product-breadcrumbs {
+    margin-bottom: 10px;
+    padding-top: 10px;
+  }
+
+  .product-breadcrumbs .breadcrumbs,
+  .product-breadcrumbs .breadcrumbs-list__link {
+    font-size: 14px;
+    /* 移动端稍微小一点 */
+  }
+
+  /* 移动端允许换行显示 */
+  .product-breadcrumbs .breadcrumbs-list__link {
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
+/* PC端样式 - 添加白色背景和间距 */
+@media (min-width: 769px) {
+  :root {
+    --product-column-padding: calc(8 * var(--space-unit));
+    --product-column-gap: 2rem;
+  }
+
+  .product-main {
+    /* Ensure two columns + gap fit within container */
+    --product-info-width: calc((100% - var(--product-column-gap)) / 2);
+    --product-media-width: calc((100% - var(--product-column-gap)) / 2);
+    display: flex;
+    gap: var(--product-column-gap);
+    /* align-items: stretch; */
+    align-items: flex-start;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* 产品媒体和产品信息模块样式 */
+  .product-media,
+  .product-info,
+  .product-content-reviews-container {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    /* 比页面背景色深一点的灰色 */
+    border-radius: 4px;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+
+  .product-main .product-media {
+    width: var(--product-media-width);
+    padding: calc(10 * var(--space-unit)) var(--product-column-padding);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+
+  .product-main .product-info {
+    position: relative;
+    width: var(--product-info-width);
+    padding: calc(10 * var(--space-unit)) var(--product-column-padding);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    /* 允许在垂直方向上出现滚动条，如果内容超过最大高度，用户可以滚动查看。 */
+    max-height: 100%;
+    /* 设置最大高度为 100%，确保该元素不会超出其父容器的高度。 */
+  }
+
+  /* 产品内容和评论容器样式 */
+  .product-content-reviews-container {
+    display: flex;
+    gap: 30px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+  }
+
+  /* 确保product-content-reviews-container与product-main的间距一致 */
+  .product-main+.product-content-reviews-container {
+    margin-top: 0;
+  }
+
+  .product-content-reviews-container+.product-main {
+    margin-top: 0;
+  }
+
+  /* 产品信息内容区域 */
+  .product-main .product-info>* {
+    flex-shrink: 0;
+  }
+
+  /* 产品图片大图上方间距
+.product-main .media-gallery__viewer {
+  margin-top: calc(1.5 * var(--space-unit));
+} */
+
+  /* 产品图片区域底部间距
+  .product-main .media-gallery {
+    margin-bottom: calc(1.5 * var(--space-unit));
+  } */
+
+
+
+  .product-main+.product-details {
+    width: 100vw;
+    margin: 30px 0 0 calc(-50vw + 50%);
+    padding: 0 var(--gutter);
+    clear: both;
+  }
+
+  .product-main+.product-details>.container {
+    width: 100% !important;
+    max-width: var(--page-width, 1320px) !important;
+    margin: 0 auto !important;
+    padding: 0;
+  }
+
+  .product-details__tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .product-details__content {
+    max-width: var(--page-width, 1320px);
+    margin: 0 auto;
+    padding: 0 var(--gutter);
+  }
+
+  .product-main+.product-details+.shopify-section::before {
+    top: 1px;
+  }
+
+  [dir=rtl] .product-main .product-media,
+  [dir=rtl] .product-main+.product-details>.container {
+    float: right;
+    clear: right;
+  }
+
+  [dir=rtl] .product-main .product-info {
+    float: left;
+  }
+
+  [dir=rtl] .product-main .product-info::before,
+  [dir=rtl] .product-main .product-info::after {
+    right: -1px;
+    left: auto;
+  }
+
+  .product-details__calc .h4 {
+    margin-bottom: 1.1em;
+  }
+}
+
+
+
+/* @media (min-width: 769px) {
+
+
+  /* .shopify-section:not(.product-details) {
+    clear: both;
+  } */
+/* 这一行在shopify中我删除了 */
+
+.product-breadcrumbs .breadcrumbs {
+  width: 100%;
+  /* 确保有足够空间显示长标题 */
+  padding-inline-end: 0;
+  /* 移除右侧内边距 */
+  overflow: visible;
+  /* 允许内容溢出，确保完整显示 */
+}
+
+/* 调整面包屑列表布局 */
+.product-breadcrumbs .breadcrumbs-list {
+  flex-wrap: nowrap;
+  /* 不换行 */
+  width: 100%;
+  overflow: visible;
+}
+
+/* 确保面包屑图标垂直对齐 */
+.product-breadcrumbs .breadcrumbs-list svg {
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .product-main .product-info {
+    min-height: 1000px;
+  }
+}
+
+@media (min-width: 1280px) {
+  :root {
+    --product-column-padding: calc(12 * var(--space-unit));
+  }
+
+}

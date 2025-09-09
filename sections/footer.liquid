@@ -1,0 +1,350 @@
+<link rel="stylesheet" href="{{ 'footer.css' | asset_url }}" media="print" onload="this.media='all'">
+
+{%- if section.settings.enable_country_selector or section.settings.enable_language_selector -%}
+  <script src="{{ 'custom-select.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+{%- style -%}
+  .footer {
+    --bg-color: {{ section.settings.bg_color.rgba }};
+    --heading-color: {{ section.settings.text_color.rgb }};
+    --text-color: {{ section.settings.text_color.rgb }};
+  }
+{%- endstyle -%}
+
+{%- if section.settings.show_back_to_top -%}
+  <a href="#" class="back-to-top text-sm block border-top font-bold text-center text-current p-6 border-bottom"{% if settings.animations_enabled != "disabled" %} data-cc-animate{% endif %}>{{ 'sections.footer.back_to_top' | t }}</a>
+{%- endif -%}
+<footer class="footer bg-theme-bg text-theme-text">
+  <div class="container">
+    <div class="footer__main">
+      <!-- Logo and Social Media -->
+      <div class="footer-col footer-col--brand">
+        <div class="footer-block">
+          <div class="footer-block__logo">
+            <a href="{{ routes.root_url }}">
+              <img src="{{ 'image-removebg-preview.png' | file_url }}" alt="{{ shop.name }}" class="footer-logo">
+            </a>
+          </div>
+          <div class="footer-block__social">
+            <a href="https://www.facebook.com/GoMaxLead/" aria-label="Facebook">{% render 'icon-facebook' %}</a>
+            <a href="https://www.youtube.com/@GoMaxLead" aria-label="YouTube">{% render 'icon-youtube' %}</a>
+            <a href="https://www.instagram.com/gomaxlead/" aria-label="Instagram">{% render 'icon-instagram' %}</a>
+            <a href="#" aria-label="TikTok">{% render 'icon-tiktok' %}</a>
+            <a href="#" aria-label="Pinterest">{% render 'icon-pinterest' %}</a>
+          </div>
+          <div class="footer-block__subscribe">
+            <h3 class="footer-block__heading">Subscribe for 10% Off</h3>
+            <p>Enter your email to subscribe and get your first order!</p>
+            <div class="footer-block__form">
+              <input type="email" placeholder="Enter Your Email" class="footer-email-input">
+              <button type="submit" class="footer-subscribe-btn">Subscribe</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Corporate Links -->
+      <div class="footer-col footer-col--links">
+        <div class="footer-block">
+          <h3 class="footer-block__heading">Corporate</h3>
+          <ul class="footer-menu__links">
+            <li><a href="/pages/about">About MaxLead</a></li>
+            <!-- <li><a href="#">MaxLead Business(B2B)</a></li>
+            <li><a href="/pages/influencer">MaxLead Influencer</a></li>
+            <li><a href="/pages/affiliate">Affiliate Program</a></li> -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- Information Links -->
+      <div class="footer-col footer-col--links">
+        <div class="footer-block">
+          <h3 class="footer-block__heading">Information</h3>
+          <ul class="footer-menu__links">
+            <li><a href="/pages/contact">Contact Us</a></li>
+            <li><a href="/pages/shipping-return">Shipping & Return</a></li>
+           <!-- <li><a href="/pages/payment">Payment Policy</a></li> -->
+           <li><a href="/pages/terms-conditions">Terms & Conditions</a></li>
+            <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+            <li><a href="/pages/faq">FAQs</a></li>
+            <!-- <li><a href="/pages/blogs">Blogs</a></li> -->
+          </ul>
+        </div>
+      </div>
+
+      <!-- My Account Links -->
+      <div class="footer-col footer-col--links">
+        <div class="footer-block">
+          <h3 class="footer-block__heading">My Account</h3>
+          <ul class="footer-menu__links">
+            <li><a href="/account/orders">Order history</a></li>
+            <li><a href="/account/orders">Track Order</a></li>
+          </ul>
+        </div>
+
+        <!-- Shipping -->
+        <div class="footer-block">
+          <h3 class="footer-block__heading">Shipping</h3>
+          <div class="footer-shipping-logos">
+            <img src="{{ 'b-FedEx.svg' | file_url }}" alt="FedEx" width="60" height="30">
+          </div>
+        </div>
+      </div>
+
+
+      <!-- Payment Method Column -->
+      <div class="footer-col footer-col--payment">
+        <div class="footer-block">
+          <h3 class="footer-block__heading">Payment Method</h3>
+          <div class="footer-payment-logos">
+            <img src="{{ 'b-VISA.svg' | file_url }}" alt="Visa" width="60" height="30">
+            <img src="{{ 'b-MasterCard.svg' | file_url }}" alt="Mastercard" width="60" height="30">
+            <img src="{{ 'b-AMEX.svg' | file_url }}" alt="American Express" width="60" height="30">
+            <img src="{{ 'b-Discover.svg' | file_url }}" alt="Discover" width="60" height="30">
+            <img src="{{ 'b-JCB.svg' | file_url }}" alt="JCB" width="60" height="30">
+            <img src="{{ 'b-Diners-Club.svg' | file_url }}" alt="Diners Club" width="60" height="30">
+            <img src="{{ 'b-PayPal.svg' | file_url }}" alt="PayPal" width="60" height="30">
+            <img src="{{ 'amazon-pay.svg' | file_url }}" alt="Amazon Pay" width="60" height="30">
+            <img src="{{ 'afterpay.svg' | file_url }}" alt="Afterpay" width="60" height="30">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% javascript %}
+  customElements.whenDefined('details-disclosure').then(() => {
+    class FooterMenu extends DetailsDisclosure {
+      constructor() {
+        super();
+        this.reset(false);
+        window.addEventListener('on:breakpoint-change', this.reset.bind(this));
+      }
+
+      reset() {
+        const isLargeScreen = window.matchMedia(theme.mediaQueries.md).matches;
+        const isConfirmNewsletter = !isLargeScreen &&
+          (window.location.hash === "#footer-signup_form" && this.querySelector('#footer-signup_form') !== null);
+
+        this.disclosure.open = isLargeScreen || isConfirmNewsletter;
+
+        if (isLargeScreen) {
+          this.toggle.setAttribute('tabindex', '-1');
+        } else {
+          this.toggle.removeAttribute('tabindex');
+        }
+      }
+    }
+
+    customElements.define('footer-menu', FooterMenu);
+  });
+{% endjavascript %}
+
+{% schema %}
+{
+  "name": "Footer",
+  "class": "cc-footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_back_to_top",
+      "label": "Show 'Back to top'",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "Show payment icons",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_powered_by",
+      "label": "Show 'Powered by Shopify'",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Country/Region selector",
+      "info": "To add a country/region, go to your [payment settings](/admin/settings/payments)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "label": "Enable country/region selector",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Language selector",
+      "info": "To add a language, go to your [language settings](/admin/settings/languages)"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "label": "Enable language selector",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Secondary menu"
+    },
+    {
+      "type": "link_list",
+      "id": "secondary_menu",
+      "label": "Secondary menu",
+      "info": "This menu won't show dropdown items."
+    },
+    {
+      "type": "header",
+      "content": "Style"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background color",
+      "default": "#f4f4f4"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#070707"
+    }
+  ],
+  "max_blocks": 4,
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "link_list",
+      "name": "Footer menu",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading (required)",
+          "default": "Footer links"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu",
+          "info": "This menu won't show dropdown items.",
+          "default": "footer"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "name": "Image, Text and Socials",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "range",
+          "id": "image_width",
+          "min": 50,
+          "max": 300,
+          "step": 10,
+          "unit": "px",
+          "label": "Maximum image width",
+          "default": 150
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Talk about your store"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Share store details, promotions, or brand content with your customers.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "Button link"
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_follow_on_shop",
+          "default": false,
+          "label": "Enable Follow on Shop",
+          "info": "To allow customers to follow your store on the Shop app from your storefront, Shop Pay must be enabled. [Learn more](https://help.shopify.com/manual/online-store/themes/customizing-themes/follow-on-shop)"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_social",
+          "label": "Show social media links",
+          "info": "Add links to your social media accounts in theme settings.",
+          "default": false
+        },
+        {
+          "type": "select",
+          "id": "text_align",
+          "label": "Content alignment",
+          "options": [
+            {
+              "value": "text-start",
+              "label": "Left"
+            },
+            {
+              "value": "text-center",
+              "label": "Center"
+            },
+            {
+              "value": "text-end",
+              "label": "Right"
+            }
+          ],
+          "default": "text-start"
+        }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Email signup",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "Heading",
+          "default": "Newsletter"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text",
+          "default": "<p>Sign up for exclusive offers, original stories, events and more.</p>"
+        },
+        {
+          "type": "paragraph",
+          "content": "Customers who subscribe will have their email address added to the \"accepts marketing\" [customer list](/admin/customers?query=&accepts_marketing=1)"
+        },
+        {
+          "type": "checkbox",
+          "id": "collapse_mobile",
+          "label": "Show as collapsible content on mobile",
+          "default": true
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

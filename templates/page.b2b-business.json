@@ -1,0 +1,176 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "b2b_business_page": {
+      "type": "b2b-business-page",
+      "blocks": {
+        "dropshipping_feature_1": {
+          "type": "dropshipping_feature",
+          "settings": {
+            "feature_text": "1. Access to thousands of high-quality and competitively priced products!"
+          }
+        },
+        "dropshipping_feature_2": {
+          "type": "dropshipping_feature",
+          "settings": {
+            "feature_text": "2. Special Discounts off B2C Pricing!"
+          }
+        },
+        "dropshipping_feature_3": {
+          "type": "dropshipping_feature",
+          "settings": {
+            "feature_text": "3. Even Deeper Discount Pricing for Accounts with $5k+ Sales Annually!"
+          }
+        },
+        "dropshipping_feature_4": {
+          "type": "dropshipping_feature",
+          "settings": {
+            "feature_text": "4. Access to live product data feed (product info, price, stock availability)!"
+          }
+        },
+        "wholesale_feature_1": {
+          "type": "wholesale_feature",
+          "settings": {
+            "feature_text": "1. Tiered large volume discounts"
+          }
+        },
+        "wholesale_feature_2": {
+          "type": "wholesale_feature",
+          "settings": {
+            "feature_text": "2. LTL / container shipment"
+          }
+        },
+        "wholesale_feature_3": {
+          "type": "wholesale_feature",
+          "settings": {
+            "feature_text": "3. Custom orders"
+          }
+        },
+        "wholesale_feature_4": {
+          "type": "wholesale_feature",
+          "settings": {
+            "feature_text": "4. Dedicated account manager"
+          }
+        },
+        "category_home_goods": {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Home Goods",
+            "category_url": ""
+          }
+        },
+        "category_office": {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Office",
+            "category_url": ""
+          }
+        },
+        "category_toys": {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Toys & Hobbies",
+            "category_url": ""
+          }
+        },
+        "category_pets": {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Pet Supplies",
+            "category_url": ""
+          }
+        },
+        "category_outdoor": {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Outdoor Products",
+            "category_url": ""
+          }
+        },
+        "category_sports": {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Sports",
+            "category_url": ""
+          }
+        },
+        "service_delivery": {
+          "type": "service_feature",
+          "settings": {
+            "feature_text": "Free Delivery"
+          }
+        },
+        "service_return": {
+          "type": "service_feature",
+          "settings": {
+            "feature_text": "30 Day Return Policy"
+          }
+        },
+        "service_dispatch": {
+          "type": "service_feature",
+          "settings": {
+            "feature_text": "24 Hour Dispatch"
+          }
+        },
+        "service_checkout": {
+          "type": "service_feature",
+          "settings": {
+            "feature_text": "Secure Checkout"
+          }
+        }
+      },
+      "block_order": [
+        "dropshipping_feature_1",
+        "dropshipping_feature_2",
+        "dropshipping_feature_3",
+        "dropshipping_feature_4",
+        "wholesale_feature_1",
+        "wholesale_feature_2",
+        "wholesale_feature_3",
+        "wholesale_feature_4",
+        "category_home_goods",
+        "category_office",
+        "category_toys",
+        "category_pets",
+        "category_outdoor",
+        "category_sports",
+        "service_delivery",
+        "service_return",
+        "service_dispatch",
+        "service_checkout"
+      ],
+      "settings": {
+        "show_hero_banner": true,
+        "hero_image": "shopify://shop_images/banner-PC.jpg",
+        "hero_title": "Grow Your Business With Aosom",
+        "hero_description": "<p>Your one-stop B2B solution for retail, restaurants, home design, and more!</p>",
+        "hero_button_text": "Sign Up Now",
+        "hero_button_url": "#contact",
+        "show_business_types": true,
+        "dropshipping_image": "shopify://shop_images/DM_00104_1.jpg",
+        "dropshipping_title": "DROPSHIPPING",
+        "dropshipping_button_text": "DROPSHIPPER LOGIN",
+        "dropshipping_button_url": "",
+        "wholesale_image": "shopify://shop_images/DM_00104_1.jpg",
+        "wholesale_title": "WHOLESALE (COMING SOON)",
+        "show_product_categories": true,
+        "show_service_map": true,
+        "map_image": "shopify://shop_images/20250811-105945.jpg",
+        "service_title": "STRATEGICALLY LOCATED: 6 WAREHOUSES FOR FAST AND RELIABLE SERVICES",
+        "padding_top": 0,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "b2b_business_page"
+  ]
+}

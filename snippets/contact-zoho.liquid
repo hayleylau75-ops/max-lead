@@ -1,0 +1,54 @@
+{%- style -%}
+  .contact-form-description {
+    text-align: center;
+    color: #1e3c8b;
+    margin: 0 auto 40px;
+    max-width: 600px;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+{%- endstyle -%}
+
+<div id='zohoSupportWebToCase'>
+    <form name='zsWebToCase_7326000795433637' id='zsWebToCase_7326000795433637'
+        action='https://desk.zoho.com.cn/support/WebToCase' method='POST' onSubmit='return zsValidateMandatoryFields()'
+        enctype='multipart/form-data'>
+        <input type='hidden' name='xnQsjsdp' value='edbsnda096d725540895702148e112164e073' />
+        <input type='hidden' name='xmIwtLD' value='edbsn7d3bd79cde03764d2aa49914d3813fde497a2e9cea737ae0f1bbaf89883cea30' />
+        <input type='hidden' name='xJdfEaS' value='' />
+        <input type='hidden' name='actionType' value='Q2FzZXM=' />
+        <input type='hidden' name='returnURL' value='https://www.gomaxlead.com' />
+
+        <div class="contact-form-description">
+            Get in touch! We're here to quickly provide you with the information and services you need & answer any question you may have.
+        </div>
+
+        <div class="contact-form-fields">
+            <input type='text' maxlength='120' name='Contact Name' class='manfieldbdr' placeholder="Name" />
+            <input type='text' maxlength='120' name='Email' class='manfieldbdr' placeholder="E-mail" />
+            <input type='text' maxlength='120' name='Phone' placeholder="Phone" />
+            <input type='text' maxlength='255' name='Subject' class='manfieldbdr' placeholder="Order# and Product" />
+            
+            <select name='Buying Platform' onchange="setDependent(this, false)" id='CASECF26'>
+                <option value=''>Which platform did you buy our product from?</option>
+                <option value='Amazon'>Amazon</option>
+                <option value='Walmart'>Walmart</option>
+                <option value='eBay'>eBay</option>
+                <option value='The Brand Site'>The Brand Site</option>
+                <option value='Other'>Other</option>
+            </select>
+
+            <textarea name='Description' maxlength='3000' placeholder="Message detailed description of your issue."></textarea>
+
+            <div id='zsCaptchaLoading'><strong>Loading...<br><br></strong></div>
+            <div id='zsCaptcha' style='display:none;'>
+                <img src='#' id='zsCaptchaUrl' name="zsCaptchaImage">
+                <a href='#' class='zsFontClass' onclick='zsRegenerateCaptcha(); return false;'>Refresh</a>
+            </div>
+            <input type='text' name='zsWebFormCaptchaWord' placeholder="Enter the code above here" />
+            <input type='hidden' name='zsCaptchaSrc' value='' />
+
+            <input type='submit' id="zsSubmitButton_7326000795433637" value='SUBMIT'>
+        </div>
+    </form>
+</div>

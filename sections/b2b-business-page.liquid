@@ -1,0 +1,537 @@
+{% comment %}
+  B2B Business Page Section
+  用于展示企业级业务解决方案
+{% endcomment %}
+
+{%- style -%}
+  .b2b-section {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+{%- endstyle -%}
+
+<div class="b2b-section section-spacing" id="{{ section.id }}">
+  <!-- 主横幅区域 -->
+  {% if section.settings.show_hero_banner %}
+  <div class="b2b-hero">
+    <div class="b2b-hero__background">
+      {%- if section.settings.hero_image != blank -%}
+        <picture>
+          <source media="(max-width: 768px)" 
+                  srcset="{{ section.settings.hero_image_mobile | image_url: width: 750, height: 500 }}">
+          <img src="{{ section.settings.hero_image | image_url: width: 1920, height: 600 }}" 
+               alt="{{ section.settings.hero_title | escape }}"
+               class="b2b-hero__bg-image"
+               width="1920"
+               height="600"
+               loading="lazy">
+        </picture>
+      {%- else -%}
+        <div class="b2b-hero__bg-placeholder"></div>
+      {%- endif -%}
+    </div>
+    
+    <div class="b2b-hero__content container">
+      <div class="b2b-hero__text">
+        {% if section.settings.hero_title != blank %}
+          <h1 class="b2b-hero__title h1">{{ section.settings.hero_title }}</h1>
+        {% endif %}
+        
+        {% if section.settings.hero_description != blank %}
+          <div class="b2b-hero__description">
+            {{ section.settings.hero_description }}
+          </div>
+        {% endif %}
+        
+        {% if section.settings.hero_button_text != blank %}
+          <a href="{{ section.settings.hero_button_url }}" 
+             class="btn btn--primary b2b-hero__cta">
+            {{ section.settings.hero_button_text }}
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- 业务类型双栏介绍 -->
+  {% if section.settings.show_business_types %}
+  <div class="b2b-business-types">
+    <div class="container">
+      <div class="b2b-business-types__grid">
+        <!-- Dropshipping 栏 -->
+        <div class="b2b-business-type">
+          <div class="b2b-business-type__image">
+            {%- if section.settings.dropshipping_image != blank -%}
+              <img src="{{ section.settings.dropshipping_image | image_url: width: 600, height: 400 }}" 
+                   alt="Dropshipping"
+                   width="600"
+                   height="400"
+                   loading="lazy">
+            {%- else -%}
+              <div class="b2b-business-type__placeholder"></div>
+            {%- endif -%}
+          </div>
+          
+          <div class="b2b-business-type__content">
+            <h2 class="b2b-business-type__title">{{ section.settings.dropshipping_title | default: 'DROPSHIPPING' }}</h2>
+            
+            <ul class="b2b-business-type__features">
+              {% for block in section.blocks %}
+                {% if block.type == 'dropshipping_feature' %}
+                  <li>{{ block.settings.feature_text }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+            
+            {% if section.settings.dropshipping_button_text != blank %}
+              <a href="{{ section.settings.dropshipping_button_url }}" 
+                 class="btn btn--secondary b2b-business-type__btn">
+                {{ section.settings.dropshipping_button_text }}
+              </a>
+            {% endif %}
+          </div>
+        </div>
+
+        <!-- Wholesale 栏 -->
+        <div class="b2b-business-type">
+          <div class="b2b-business-type__image">
+            {%- if section.settings.wholesale_image != blank -%}
+              <img src="{{ section.settings.wholesale_image | image_url: width: 600, height: 400 }}" 
+                   alt="Wholesale"
+                   width="600"
+                   height="400"
+                   loading="lazy">
+            {%- else -%}
+              <div class="b2b-business-type__placeholder"></div>
+            {%- endif -%}
+          </div>
+          
+          <div class="b2b-business-type__content">
+            <h2 class="b2b-business-type__title">{{ section.settings.wholesale_title | default: 'WHOLESALE (COMING SOON)' }}</h2>
+            
+            <ul class="b2b-business-type__features">
+              {% for block in section.blocks %}
+                {% if block.type == 'wholesale_feature' %}
+                  <li>{{ block.settings.feature_text }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+            
+            <!-- 占位空间，确保与左侧卡片等高 -->
+            <div class="b2b-business-type__spacer"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- 产品分类网格 -->
+  {% if section.settings.show_product_categories %}
+  <div class="b2b-categories">
+    <div class="container">
+      <div class="b2b-categories__grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'product_category' %}
+            <div class="b2b-category-card">
+              <div class="b2b-category-card__image">
+                {%- if block.settings.category_image != blank -%}
+                  <img src="{{ block.settings.category_image | image_url: width: 360, height: 270 }}" 
+                       alt="{{ block.settings.category_name | escape }}"
+                       width="360"
+                       height="270"
+                       loading="lazy">
+                {%- else -%}
+                  <div class="b2b-category-card__placeholder"></div>
+                {%- endif -%}
+              </div>
+              
+              <h3 class="b2b-category-card__title">{{ block.settings.category_name }}</h3>
+              
+              {% if block.settings.category_url != blank %}
+                <a href="{{ block.settings.category_url }}" 
+                   class="b2b-category-card__link" 
+                   aria-label="View {{ block.settings.category_name }} products">
+                </a>
+              {% endif %}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- 服务地图区域 -->
+  {% if section.settings.show_service_map %}
+  <div class="b2b-service-map">
+    <div class="container">
+      <div class="b2b-service-map__grid">
+        <div class="b2b-service-map__map">
+          {%- if section.settings.map_image != blank -%}
+            <img src="{{ section.settings.map_image | image_url: width: 800, height: 500 }}" 
+                 alt="Service Map"
+                 width="800"
+                 height="500"
+                 loading="lazy">
+          {%- else -%}
+            <div class="b2b-service-map__placeholder"></div>
+          {%- endif -%}
+        </div>
+        
+        <div class="b2b-service-map__content">
+          {% if section.settings.service_title != blank %}
+            <h2 class="b2b-service-map__title">{{ section.settings.service_title }}</h2>
+          {% endif %}
+          
+          <ul class="b2b-service-features">
+            {% for block in section.blocks %}
+              {% if block.type == 'service_feature' %}
+                <li class="b2b-service-feature">
+                  {% if block.settings.feature_icon != blank %}
+                    <div class="b2b-service-feature__icon">
+                      <img src="{{ block.settings.feature_icon | image_url: width: 48, height: 48 }}" 
+                           alt="{{ block.settings.feature_text | escape }}"
+                           width="48"
+                           height="48">
+                    </div>
+                  {% endif %}
+                  <span class="b2b-service-feature__text">{{ block.settings.feature_text }}</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+
+{% schema %}
+{
+  "name": "B2B Business Page",
+  "tag": "section",
+  "class": "section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Hero Banner Settings"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_hero_banner",
+      "label": "Show hero banner",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero background image (1920×600px recommended)"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image_mobile",
+      "label": "Hero background image - Mobile (750×500px recommended)"
+    },
+    {
+      "type": "text",
+      "id": "hero_title",
+      "label": "Hero title",
+      "default": "Grow Your Business With Aosom"
+    },
+    {
+      "type": "richtext",
+      "id": "hero_description",
+      "label": "Hero description",
+      "default": "<p>Your one-stop B2B solution for retail, restaurants, home design, and more!</p>"
+    },
+    {
+      "type": "text",
+      "id": "hero_button_text",
+      "label": "Hero button text",
+      "default": "Sign Up Now"
+    },
+    {
+      "type": "url",
+      "id": "hero_button_url",
+      "label": "Hero button URL"
+    },
+    {
+      "type": "header",
+      "content": "Business Types Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_business_types",
+      "label": "Show business types section",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "dropshipping_image",
+      "label": "Dropshipping image (600×400px recommended)"
+    },
+    {
+      "type": "text",
+      "id": "dropshipping_title",
+      "label": "Dropshipping title",
+      "default": "DROPSHIPPING"
+    },
+    {
+      "type": "text",
+      "id": "dropshipping_button_text",
+      "label": "Dropshipping button text",
+      "default": "DROPSHIPPER LOGIN"
+    },
+    {
+      "type": "url",
+      "id": "dropshipping_button_url",
+      "label": "Dropshipping button URL"
+    },
+    {
+      "type": "image_picker",
+      "id": "wholesale_image",
+      "label": "Wholesale image (600×400px recommended)"
+    },
+    {
+      "type": "text",
+      "id": "wholesale_title",
+      "label": "Wholesale title",
+      "default": "WHOLESALE (COMING SOON)"
+    },
+    {
+      "type": "header",
+      "content": "Product Categories Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_product_categories",
+      "label": "Show product categories section",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Service Map Section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_service_map",
+      "label": "Show service map section",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "map_image",
+      "label": "Map image (800×500px recommended)"
+    },
+    {
+      "type": "text",
+      "id": "service_title",
+      "label": "Service section title",
+      "default": "STRATEGICALLY LOCATED: 6 WAREHOUSES FOR FAST AND RELIABLE SERVICES"
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding top",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding bottom",
+      "default": 36
+    }
+  ],
+  "blocks": [
+    {
+      "type": "dropshipping_feature",
+      "name": "Dropshipping Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_text",
+          "label": "Feature text"
+        }
+      ]
+    },
+    {
+      "type": "wholesale_feature",
+      "name": "Wholesale Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_text",
+          "label": "Feature text"
+        }
+      ]
+    },
+    {
+      "type": "product_category",
+      "name": "Product Category",
+      "settings": [
+        {
+          "type": "text",
+          "id": "category_name",
+          "label": "Category name"
+        },
+        {
+          "type": "image_picker",
+          "id": "category_image",
+          "label": "Category image (360×270px recommended)"
+        },
+        {
+          "type": "url",
+          "id": "category_url",
+          "label": "Category URL"
+        }
+      ]
+    },
+    {
+      "type": "service_feature",
+      "name": "Service Feature",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_text",
+          "label": "Feature text"
+        },
+        {
+          "type": "image_picker",
+          "id": "feature_icon",
+          "label": "Feature icon (48×48px recommended)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "B2B Business Page",
+      "blocks": [
+        {
+          "type": "dropshipping_feature",
+          "settings": {
+            "feature_text": "1. Access to thousands of high-quality and competitively priced products!"
+          }
+        },
+        {
+          "type": "dropshipping_feature",
+          "settings": {
+            "feature_text": "2. Special Discounts off B2C Pricing!"
+          }
+        },
+        {
+          "type": "dropshipping_feature",
+          "settings": {
+            "feature_text": "3. Even Deeper Discount Pricing for Accounts with $5k+ Sales Annually!"
+          }
+        },
+        {
+          "type": "dropshipping_feature",
+          "settings": {
+            "feature_text": "4. Access to live product data feed (product info, price, stock availability)!"
+          }
+        },
+        {
+          "type": "wholesale_feature",
+          "settings": {
+            "feature_text": "1. Tiered large volume discounts"
+          }
+        },
+        {
+          "type": "wholesale_feature",
+          "settings": {
+            "feature_text": "2. LTL / container shipment"
+          }
+        },
+        {
+          "type": "wholesale_feature",
+          "settings": {
+            "feature_text": "3. Custom orders"
+          }
+        },
+        {
+          "type": "wholesale_feature",
+          "settings": {
+            "feature_text": "4. Dedicated account manager"
+          }
+        },
+        {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Home Goods"
+          }
+        },
+        {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Office"
+          }
+        },
+        {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Toys & Hobbies"
+          }
+        },
+        {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Pet Supplies"
+          }
+        },
+        {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Outdoor Products"
+          }
+        },
+        {
+          "type": "product_category",
+          "settings": {
+            "category_name": "Sports"
+          }
+        },
+        {
+          "type": "service_feature",
+          "settings": {
+            "feature_text": "Free Delivery"
+          }
+        },
+        {
+          "type": "service_feature",
+          "settings": {
+            "feature_text": "30 Day Return Policy"
+          }
+        },
+        {
+          "type": "service_feature",
+          "settings": {
+            "feature_text": "24 Hour Dispatch"
+          }
+        },
+        {
+          "type": "service_feature",
+          "settings": {
+            "feature_text": "Secure Checkout"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,143 @@
+{% render 'jotform-popup' %}
+
+<div class="gardener-section1-container">
+  <div class="activity_section">
+    <div class="container">
+      <div class="section-top">
+        <div class="heading section-top-title">{{ section.settings.title }}</div>
+        <div class="heading-section-top-text">
+          {{ section.settings.text }}
+        </div>
+      </div>
+      <div class="activity_gardenr_section1-container">
+        <div class="activity_gardenr_section1-content1">
+          <div class="activity_gardenr_section1-content1-image">
+            {% render 'image', image: section.settings.image, class: 'd-m-none' %}
+            {% render 'image', image: section.settings.image_m, class: 'd-lg-none' %}
+          </div>
+          <a href="#" class="heading activity_gardenr_section1-content1-btn jotform-trigger">
+            {{- section.settings.link_text -}}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="activity_section">
+    <div class="container">
+      <div class="section-top">
+        <div class="heading section-top-title">{{ section.settings.title2 }}</div>
+        <div class="heading-section-top-text">
+          {{ section.settings.text2 }}
+        </div>
+      </div>
+      <div class="activity_gardenr_section-content2">
+        {% for block in section.blocks %}
+          <div class="activity_gardenr_section-item">
+            <div class="activity_gardenr_section1-content2-image">
+              {% render 'image', image: block.settings.icon %}
+            </div>
+            <div class="activity_gardenr_section-item-content">
+              <div class="heading activity_gardenr_section-item-title">{{ block.settings.title }}</div>
+              <div class="activity_gardenr_section-item-text">{{ block.settings.content }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+      <a href="#" class="heading activity_gardenr_section1-content1-btn jotform-trigger">
+        {{- section.settings.link_text2 -}}
+      </a>
+    </div>
+  </div>
+</div>
+
+{{ 'jotform-popup.js' | asset_url | script_tag }}
+
+{% schema %}
+{
+  "name": "Gardener Section1",
+  "settings": [
+    {
+      "type":"text",
+      "id":"title",
+      "label":"title"
+    },
+    {
+      "type":"richtext",
+      "id":"text",
+      "label":"text"
+    },
+    {
+      "type": "header",
+      "content": "Top Content"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image For PC"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_m",
+      "label": "Image For M"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Button Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Button Text",
+      "default":"Register for Gardening Benefits"
+    },
+    {
+      "type": "header",
+      "content": "The 2th Section"
+    },
+     {
+      "type":"text",
+      "id":"title2",
+      "label":"Title"
+    },
+    {
+      "type":"richtext",
+      "id":"text2",
+      "label":"text"
+    },
+    {
+      "type": "text",
+      "id": "link_text2",
+      "label": "Link Text"
+    },
+    {
+      "type": "url",
+      "id": "link2",
+      "label": "Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name":"Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id":"icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "Content"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

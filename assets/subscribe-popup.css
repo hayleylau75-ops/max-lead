@@ -1,0 +1,103 @@
+/* 订阅弹窗全新布局样式 */
+/* 使用现代flexbox布局确保完美对齐 */
+
+/* 主容器样式 */
+.subscribe-content-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  gap: 12px !important;
+}
+
+/* 左侧区域（图标+文字） */
+.subscribe-left-section {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  flex: 1 !important;
+}
+
+/* 图标容器 */
+.subscribe-icon-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  width: 20px !important;
+  height: 20px !important;
+}
+
+/* 图标样式 */
+.subscribe-icon {
+  width: 20px !important;
+  height: 20px !important;
+  object-fit: contain !important;
+  display: block !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  vertical-align: middle !important;
+}
+
+/* 文字容器 */
+.subscribe-text-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  flex: 1 !important;
+}
+
+/* 文字样式 */
+.subscribe-text {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 右侧区域 */
+.subscribe-right-section {
+  display: flex !important;
+  align-items: center !important;
+  flex-shrink: 0 !important;
+}
+
+/* 右侧文字样式 */
+.subscribe-right-text {
+  display: inline-block !important;
+  vertical-align: middle !important;
+  line-height: 1.4 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 移动端适配 */
+@media only screen and (max-width: 750px) {
+  .subscribe-content-wrapper {
+    gap: 8px !important;
+  }
+  
+  .subscribe-left-section {
+    gap: 6px !important;
+  }
+  
+  .subscribe-icon-wrapper {
+    width: 18px !important;
+    height: 18px !important;
+  }
+  
+  .subscribe-icon {
+    width: 18px !important;
+    height: 18px !important;
+  }
+}
+
+/* 确保覆盖任何可能的全局样式 */
+.sub_pop_block .subscribe-content-wrapper,
+.sub_pop_block .subscribe-left-section,
+.sub_pop_block .subscribe-icon-wrapper,
+.sub_pop_block .subscribe-text-wrapper,
+.sub_pop_block .subscribe-right-section {
+  display: flex !important;
+  align-items: center !important;
+} 

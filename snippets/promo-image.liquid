@@ -1,0 +1,102 @@
+{%- liquid
+  assign is_link = false
+  if link_url != blank and button_label == blank
+    unless content contains "<a"
+      assign is_link = true
+    endunless
+  endif
+
+  if image == blank and video_shopify
+    assign image = video_shopify.preview_image
+  endif
+
+  assign is_wide_promotion = false
+  if block_type == 'wide-promotion'
+    assign is_wide_promotion = true
+  endif
+-%}
+
+{%- if is_link -%}
+  <a href="{{- link_url -}}" class="promo promo--border video-section relative w-full{% unless min_height_image and content == blank and button_label == blank %} hover:grow-media{% endunless %} overflow-hidden {{ text_alignment }}">
+{%- else -%}
+  <div class="promo promo--border video-section relative w-full {{ text_alignment }}">
+{%- endif -%}
+
+  {%- if image -%}
+    <div class="promo-media-container w-full">
+      {%- if is_wide_promotion -%}
+        <div class="w-full" style="aspect-ratio: 1340/361; display: none;" data-pc-image>
+          {% render 'image',
+            image: image,
+            src_width: 1340,
+            widths: '800, 1000, 1200, 1340',
+            sizes: '100vw',
+            class: 'promo-image w-full h-full object-contain'
+          -%}
+        </div>
+        <div class="w-full" style="aspect-ratio: 550/309; display: block;" data-mobile-image>
+          {% render 'image',
+            image: image_mobile | default: image,
+            src_width: 550,
+            widths: '400, 450, 500, 550',
+            sizes: '100vw',
+            class: 'promo-image w-full h-full object-contain'
+          -%}
+        </div>
+        <style>
+          @media (min-width: 640px) {
+            [data-pc-image] {
+              display: block !important;
+            }
+            [data-mobile-image] {
+              display: none !important;
+            }
+          }
+        </style>
+      {%- else -%}
+        <div class="promo-image-container">
+          {% render 'image',
+            image: image,
+            src_width: 800,
+            widths: '400, 500, 600, 700, 800',
+            sizes: '100vw',
+            class: 'promo-image'
+          -%}
+        </div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  {%- if video_shopify != blank -%}
+    <deferred-media class="promo-media-container">
+      <template>
+        <video-component class="has-iframe promo-video-container no-js-hidden"
+                         data-autoplay="true"
+                         data-background="true">
+          {{ video_shopify | video_tag: class: 'promo-video', playsinline: true, autoplay: true, muted: true, loop: true, controls: false, poster: '' | replace: '<img ', '<img loading="lazy" hidden ' }}
+        </video-component>
+      </template>
+    </deferred-media>
+  {%- endif -%}
+
+  {%- if content != blank or button_label != blank -%}
+    <div class="promo__content relative"{% if text_width %} style="max-width: {{ text_width }}px;"{% endif %}>
+      {%- if content != blank -%}
+        <div class="rte rte--inherit-heading-color" style="{% unless text_type_scale == "1em" %}--font-size: var({{ text_type_scale }});{% endunless %}">
+          {{- content -}}
+        </div>
+      {%- endif -%}
+
+      {%- if button_label != blank -%}
+        <a class="promo__button {{ button_style }}{% if button_style == "link" %} block{% endif %}{% if content != blank %} mt-3{% endif %}" {% if link_url != blank %}href="{{ link_url }}"{% else %}role="link" aria-disabled="true"{% endif %}>
+          {{- button_label | escape -}}
+        </a>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+{%- if is_link -%}
+  </a>
+{%- else -%}
+  </div>
+{%- endif -%}

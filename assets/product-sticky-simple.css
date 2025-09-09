@@ -1,0 +1,64 @@
+/* 产品页面粘性效果 - 桌面端专用 */
+
+@media (min-width: 769px) {
+
+    /* 产品主容器 */
+    /* .product-main {
+        position: relative;
+        display: flex;
+        gap: var(--product-column-gap);
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 auto !important;
+        justify-content: center !important;
+    } */
+
+    /* 产品媒体区域 - 基础状态（第一阶段：自然滚动） */
+    .product-media {
+        position: relative;
+        flex: 0 0 var(--product-media-width);
+        transition: transform 0.2s ease;
+    }
+
+    /* 第二阶段：粘性固定 */
+    .product-media {
+        position: sticky;
+        top: var(--sticky-top, 85px);
+        /* 使用CSS变量，默认85px */
+        /* z-index: 10;
+        transform: scale(1.002); */
+        /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+    }
+
+    /* 第三阶段：释放固定 */
+    .product-main--release-sticky .product-media {
+        position: relative !important;
+        top: auto !important;
+        transform: none !important;
+        box-shadow: none !important;
+        transition: none !important;
+    }
+
+    /* 产品信息区域 */
+    .product-info {
+        flex: 0 0 var(--product-info-width);
+        position: relative;
+        z-index: 5;
+    }
+}
+
+/* 移动端保持原样 */
+@media (max-width: 768px) {
+    .product-media {
+        position: relative !important;
+        top: auto !important;
+        transform: none !important;
+        box-shadow: none !important;
+        transition: none !important;
+    }
+
+    .product-info {
+        position: relative !important;
+        top: auto !important;
+    }
+}

@@ -1,0 +1,238 @@
+/* Contact form container */
+.contact {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+/* Page title */
+.main-page-title {
+    text-align: center;
+    color: #333;
+    font-size: 32px;
+    margin-bottom: 30px;
+}
+
+/* Description text */
+.page__text {
+    text-align: center;
+    color: #1e3c8b;
+    margin: 0 auto 40px;
+    max-width: 600px;
+    font-size: 16px;
+    line-height: 1.5;
+}
+
+/* Tab styles */
+.contact-tab-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.contact-tab-item {
+    padding: 10px 25px;
+    border-radius: 30px;
+    cursor: pointer;
+    border: 1px solid #8cc63f;
+    color: #333;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.contact-tab-item.active {
+    background-color: #8cc63f;
+    color: white;
+}
+
+.contact-tab-contents {
+    position: relative;
+}
+
+.contact-tab-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-align: center;
+}
+
+.contact-tab-content.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Form container */
+#zohoSupportWebToCase {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.zsFormClass {
+    background: white;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+/* Hide table headers */
+.zsFormClass td.zsFontClass {
+    display: none;
+}
+
+.zsFormClass td {
+    padding: 0;
+    border: none;
+    display: block;
+    width: 100% !important;
+}
+
+/* Form fields */
+#zohoSupportWebToCase input[type='text'],
+#zohoSupportWebToCase input[type='email'],
+#zohoSupportWebToCase input[type='tel'],
+#zohoSupportWebToCase select,
+#zohoSupportWebToCase textarea {
+    width: 100%;
+    padding: 15px 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 30px;
+    font-size: 14px;
+    color: #333;
+    background: white;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+#zohoSupportWebToCase textarea {
+    min-height: 150px;
+    border-radius: 20px;
+    resize: vertical;
+}
+
+#zohoSupportWebToCase input:focus,
+#zohoSupportWebToCase select:focus,
+#zohoSupportWebToCase textarea:focus {
+    outline: none;
+    border-color: #8cc63f;
+}
+
+/* Select dropdown */
+#zohoSupportWebToCase select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M8 12L2 6h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    padding-right: 40px;
+    cursor: pointer;
+}
+
+/* Captcha section */
+#zsCaptcha {
+    margin: 20px 0;
+    text-align: left;
+}
+
+#zsCaptcha img {
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+#zohoSupportWebToCase input[name="zsWebFormCaptchaWord"] {
+    max-width: 100%;
+    margin-top: 10px;
+}
+
+/* Submit button */
+#zsSubmitButton_7326000795433637 {
+    width: 100%;
+    background: #8cc63f;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 20px;
+}
+
+#zsSubmitButton_7326000795433637:hover {
+    background: #7ab62f;
+}
+
+/* Reset button */
+#zohoSupportWebToCase input[type="button"] {
+    display: none;
+}
+
+/* Powered by section */
+.wb_FtCon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    color: #666;
+    font-size: 12px;
+}
+
+.wb_logo {
+    max-width: 16px;
+    margin-left: 5px;
+}
+
+/* Add placeholder text */
+#zohoSupportWebToCase input[name="Contact Name"] {
+    background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/%3E%3Ccircle cx='12' cy='7' r='4'/%3E%3C/svg%3E") no-repeat 20px center;
+    padding-left: 45px;
+    background-size: 16px;
+}
+
+#zohoSupportWebToCase input[name="Email"] {
+    background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z'/%3E%3Cpolyline points='22,6 12,13 2,6'/%3E%3C/svg%3E") no-repeat 20px center;
+    padding-left: 45px;
+    background-size: 16px;
+}
+
+#zohoSupportWebToCase input[name="Phone"] {
+    background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z'/%3E%3C/svg%3E") no-repeat 20px center;
+    padding-left: 45px;
+    background-size: 16px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 768px) {
+    .contact {
+        padding: 20px;
+    }
+
+    .contact-tab-list {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .contact-tab-item {
+        width: 100%;
+        max-width: 300px;
+        text-align: center;
+    }
+
+    #zohoSupportWebToCase input[type='text'],
+    #zohoSupportWebToCase input[type='email'],
+    #zohoSupportWebToCase input[type='tel'],
+    #zohoSupportWebToCase select,
+    #zohoSupportWebToCase textarea {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+
+    #zohoSupportWebToCase input[name="Contact Name"],
+    #zohoSupportWebToCase input[name="Email"],
+    #zohoSupportWebToCase input[name="Phone"] {
+        padding-left: 40px;
+        background-position: 15px center;
+    }
+}

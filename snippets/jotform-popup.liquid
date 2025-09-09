@@ -1,0 +1,56 @@
+<!-- Jotform Popup Modal -->
+<div id="jotform-popup" class="jotform-modal" style="display: none;">
+  <div class="jotform-modal-content">
+    <span class="jotform-close">&times;</span>
+    <iframe
+      id="jotform-iframe"
+      style="width: 100%; height: 100%; border: none;"
+      src=""
+      title="Vendor Registration Form">
+    </iframe>
+  </div>
+</div>
+
+<style>
+.jotform-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.jotform-modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 5% auto;
+  width: 90%;
+  max-width: 800px;
+  height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.jotform-close {
+  position: absolute;
+  right: -15px;
+  top: -15px;
+  color: #fff;
+  background: #000;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+  font-size: 24px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.jotform-close:hover {
+  background: #444;
+}
+</style> 

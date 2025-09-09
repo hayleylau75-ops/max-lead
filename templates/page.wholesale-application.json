@@ -1,0 +1,125 @@
+{
+    "sections": {
+        "wholesale_application": {
+            "type": "wholesale-application",
+            "blocks": {
+                "advantage_1": {
+                    "type": "advantage_item",
+                    "settings": {
+                        "icon": "shopify://shop_images/b2b-pricing.png",
+                        "title": "Competitive B2B Pricing",
+                        "description": ""
+                    }
+                },
+                "advantage_2": {
+                    "type": "advantage_item",
+                    "settings": {
+                        "icon": "shopify://shop_images/customer-support.png",
+                        "title": "Reliable 24/7 Support – Always Here for You",
+                        "description": ""
+                    }
+                },
+                "advantage_3": {
+                    "type": "advantage_item",
+                    "settings": {
+                        "icon": "shopify://shop_images/fast-delivery.png",
+                        "title": "Nationwide Fast Shipping – 10+ Warehouses Across the US",
+                        "description": ""
+                    }
+                },
+                "advantage_4": {
+                    "type": "advantage_item",
+                    "settings": {
+                        "icon": "shopify://shop_images/warranty.png",
+                        "title": "Hassle-Free 30-Day Returns & 1-Year Warranty Protection",
+                        "description": ""
+                    }
+                },
+                "step_1": {
+                    "type": "step_item",
+                    "settings": {
+                        "step_image": "shopify://shop_images/DM_00104_1.jpg",
+                        "step_text": "<strong>Apply Online</strong> – Fill out the quick form to get started."
+                    }
+                },
+                "step_2": {
+                    "type": "step_item",
+                    "settings": {
+                        "step_image": "shopify://shop_images/DM_00104_1.jpg",
+                        "step_text": "<strong>Instant Access</strong> – Order 24/7 for fast dropshipping."
+                    }
+                },
+                "step_3": {
+                    "type": "step_item",
+                    "settings": {
+                        "step_image": "shopify://shop_images/DM_00104_1.jpg",
+                        "step_text": "<strong>Flexible Fulfillment</strong> – We ship to your store, warehouse, or customers – or pick up at our local facilities."
+                    }
+                },
+                "step_4": {
+                    "type": "step_item",
+                    "settings": {
+                        "step_image": "shopify://shop_images/DM_00104_1.jpg",
+                        "step_text": "<strong>Bulk order specialists</strong> – Email b2b@gmainland.com for LTL/container quotes."
+                    }
+                },
+                "faq_1": {
+                    "type": "faq_item",
+                    "settings": {
+                        "question": "Does Maxlead charge any fees to sign up for the B2B program?",
+                        "answer": "Zero fees - your business account is completely free."
+                    }
+                },
+                "faq_2": {
+                    "type": "faq_item",
+                    "settings": {
+                        "question": "What tax documents do I need to apply for wholesale purchasing?",
+                        "answer": "To streamline your wholesale application, please check <a href=\"https://www.avalara.com/blog/en/north-america/2023/02/a-state-by-state-guide-to-resale-certificates.html\" target=\"_blank\" rel=\"noopener noreferrer\">Avalara</a> for information on your state's particular tax requirements."
+                    }
+                },
+                "faq_3": {
+                    "type": "faq_item",
+                    "settings": {
+                        "question": "Can I sell Maxlead products on Amazon or Walmart?",
+                        "answer": "To maintain brand integrity, Maxlead products are not authorized for resale on Amazon, Walmart, auction sites, or any PPC campaigns using our brand terms. As an approved retailer, you'll benefit from exclusive MAP pricing protection—ensuring fair competition and healthy margins. Partner with us for authorized distribution channels that deliver mutual success."
+                    }
+                },
+                "faq_4": {
+                    "type": "faq_item",
+                    "settings": {
+                        "question": "What kind of wholesale discounts can I get?",
+                        "answer": "We offer exclusive B2B pricing below retail rates, with additional volume discounts for accounts exceeding $5K in annual sales. The larger your order, the bigger your savings—scale your business while maximizing margins."
+                    }
+                }
+            },
+            "block_order": [
+                "advantage_1",
+                "advantage_2",
+                "advantage_3",
+                "advantage_4",
+                "step_1",
+                "step_2",
+                "step_3",
+                "step_4",
+                "faq_1",
+                "faq_2",
+                "faq_3",
+                "faq_4"
+            ],
+            "settings": {
+                "show_hero": true,
+                "hero_title": "Unlock Exclusive B2B Benefits",
+                "hero_cta_text": "Get Started >",
+                "hero_cta_link": "/pages/wholesale-signup",
+                "show_advantages": true,
+                "show_how_to_join": true,
+                "how_to_get_started_title": "How to Get Started?",
+                "show_faq": true,
+                "faq_title": "FAQ"
+            }
+        }
+    },
+    "order": [
+        "wholesale_application"
+    ]
+}

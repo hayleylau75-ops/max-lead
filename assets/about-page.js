@@ -7,54 +7,88 @@ var product = new Vue({
     data() {
         return {
             swiperIndex: 0,
+            swiper: null
         }
     },
     mounted() {
-        this.initSwiper()
+        // 等待所有资源加载完成
+        this.$nextTick(() => {
+            this.waitForSwiper()
+        })
     },
     methods: {
+        waitForSwiper() {
+            // 确保 Swiper 库已加载
+            if (typeof Swiper !== 'undefined') {
+                console.log('Swiper library found, initializing...')
+                this.initSwiper()
+            } else {
+                // 如果 Swiper 未加载，等待一段时间后重试
+                console.log('Swiper library not found, retrying...')
+                setTimeout(() => {
+                    this.waitForSwiper()
+                }, 100)
+            }
+        },
         initSwiper() {
-            const perview = this.p()
+            // 确保之前的swiper实例被销毁
+            if (this.swiper) {
+                this.swiper.destroy(true, true)
+            }
+
+            console.log('Initializing Swiper...')
             const that = this
             this.swiper = new Swiper('.swiper-container', {
+                // 基本配置
                 initialSlide: 0,
+                slidesPerView: 1,
+                spaceBetween: 0,
+                centeredSlides: false,
+                loop: false,
+                allowTouchMove: true,
+
+                // 导航按钮
                 navigation: {
                     nextEl: '.next-btn',
                     prevEl: '.prev-btn',
                 },
-                observer: true,//修改swiper自己或子元素时，自动初始化swiper
-                observeParents: true,//修改swiper的父元素时，自动初始化swiper
+
+                // 自动观察DOM变化
+                observer: true,
+                observeParents: true,
+                observeSlideChildren: true,
+
+                // 事件处理
                 on: {
-                    resize: function () {
-                        // this.params.slidesPerView = that.p()
-                        this.update()
+                    init: function () {
+                        console.log('Swiper initialized, active index:', this.activeIndex)
+                        that.swiperIndex = this.activeIndex
+                        that.updateTimeline()
                     },
-                    transitionStart: (data) => {
-                        that.swiperIndex = data.activeIndex
-                        // const currentDome = document.getElementsByClassName('swiper-slide-active')[0]
-                        // console.log(currentDome.lastChild)
-                        // let allDom = document.getElementsByClassName("swiper-slide");
-                        // for (let i = 0; i < allDom.length; i++) {
-                        //   const element = allDom[i];
-                        //   element.lastChild.style.background = 'none'
-                        // }
-                        // currentDome.lastChild.style.background = '#89C321'
+                    slideChange: function () {
+                        console.log('Slide changed to index:', this.activeIndex)
+                        that.swiperIndex = this.activeIndex
+                        that.updateTimeline()
+                    },
+                    resize: function () {
+                        this.update()
                     }
                 }
             })
         },
-        p() {
-            const { clientWidth } = window.document.documentElement
-            let count
-            if (clientWidth > 1200) {
-                count = 3.4
-            } else if (clientWidth < 1200 && clientWidth > 980) {
-                count = 2
-            } else {
-                count = 1
+        updateTimeline() {
+            // 获取当前活动幻灯片的内容
+            const activeSlide = document.querySelector('.swiper-slide-active')
+            if (activeSlide) {
+                const slideTitle = activeSlide.querySelector('.photo_con_title')
+                const slideDesc = activeSlide.querySelector('.photo_con_desc_title')
+
+                // 更新时间轴显示
+                const timelineElement = document.querySelector('.about1_play_con_tm h1')
+                if (timelineElement && slideTitle) {
+                    timelineElement.textContent = slideTitle.textContent
+                }
             }
-            console.log(count)
-            return count
         },
         handleClick(event, data) {
             switch (event) {

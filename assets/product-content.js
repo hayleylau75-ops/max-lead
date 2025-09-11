@@ -1,77 +1,144 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // 防止重复初始化
+    let isInitialized = false;
+
     // 处理折叠功能
     function initCollapsible() {
+        if (isInitialized) return;
+
         const collapsibleButtons = document.querySelectorAll('[data-action="toggle-collapsible"]');
 
+        // 如果没有找到按钮，直接返回
+        if (collapsibleButtons.length === 0) return;
+
         collapsibleButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const expanded = this.getAttribute('aria-expanded') === 'true';
-                const targetId = this.getAttribute('aria-controls');
-                const target = document.getElementById(targetId);
-
-                // 如果需要关闭其他项
-                if (this.dataset.closeSiblings === 'true') {
-                    const parentElement = this.closest('.card');
-                    if (parentElement) {
-                        const siblings = parentElement.querySelectorAll('[data-action="toggle-collapsible"]');
-                        siblings.forEach(sibling => {
-                            if (sibling !== this) {
-                                sibling.setAttribute('aria-expanded', 'false');
-                                // 显示竖线
-                                const vLine = sibling.querySelector('.disclosure__toggle .icon .v-line');
-                                if (vLine) {
-                                    vLine.style.opacity = '1';
-                                }
-                                const siblingTargetId = sibling.getAttribute('aria-controls');
-                                const siblingTarget = document.getElementById(siblingTargetId);
-                                if (siblingTarget) {
-                                    siblingTarget.style.height = '0';
-                                }
-                            }
-                        });
-                    }
-                }
-
-                // 切换当前项
-                if (expanded) {
-                    this.setAttribute('aria-expanded', 'false');
-                    // 显示竖线
-                    const vLine = this.querySelector('.disclosure__toggle .icon .v-line');
-                    if (vLine) {
-                        vLine.style.opacity = '1';
-                    }
-                    target.style.height = '0';
-                } else {
-                    this.setAttribute('aria-expanded', 'true');
-                    // 隐藏竖线
-                    const vLine = this.querySelector('.disclosure__toggle .icon .v-line');
-                    if (vLine) {
-                        vLine.style.opacity = '0';
-                    }
-                    const content = target.querySelector('.card__collapsible-content');
-                    if (content) {
-                        target.style.height = content.offsetHeight + 'px';
-                    } else {
-                        target.style.height = 'auto';
-                    }
-                }
-            });
+            // 移除可能存在的旧事件监听器
+            button.removeEventListener('click', handleCollapsibleClick);
+            // 添加新的事件监听器
+            button.addEventListener('click', handleCollapsibleClick);
         });
 
         // 初始化高度
+        initializeCollapsibleHeights();
+
+        isInitialized = true;
+    }
+
+    // 处理点击事件
+    function handleCollapsibleClick(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const button = this;
+        const expanded = button.getAttribute('aria-expanded') === 'true';
+        const targetId = button.getAttribute('aria-controls');
+        const target = document.getElementById(targetId);
+
+        if (!target) return;
+
+        // 如果需要关闭其他项
+        if (button.dataset.closeSiblings === 'true') {
+            const parentElement = button.closest('.card');
+            if (parentElement) {
+                const siblings = parentElement.querySelectorAll('[data-action="toggle-collapsible"]');
+                siblings.forEach(sibling => {
+                    if (sibling !== button) {
+                        closeCollapsible(sibling);
+                    }
+                });
+            }
+        }
+
+        // 切换当前项
+        if (expanded) {
+            closeCollapsible(button);
+        } else {
+            openCollapsible(button);
+        }
+    }
+
+    // 打开手风琴
+    function openCollapsible(button) {
+        const targetId = button.getAttribute('aria-controls');
+        const target = document.getElementById(targetId);
+        const content = target.querySelector('.card__collapsible-content');
+
+        if (!target || !content) return;
+
+        button.setAttribute('aria-expanded', 'true');
+
+        // 隐藏竖线
+        const vLine = button.querySelector('.disclosure__toggle .icon .v-line');
+        if (vLine) {
+            vLine.style.opacity = '0';
+        }
+
+        // 确保内容可见以计算高度
+        target.style.height = 'auto';
+        const contentHeight = content.offsetHeight;
+
+        // 设置过渡高度
+        target.style.height = '0';
+        // 强制重绘
+        target.offsetHeight;
+
+        // 设置最终高度
+        target.style.height = contentHeight + 'px';
+
+        // 过渡结束后设置为auto
+        setTimeout(() => {
+            if (target.style.height !== '0') {
+                target.style.height = 'auto';
+            }
+        }, 300);
+    }
+
+    // 关闭手风琴
+    function closeCollapsible(button) {
+        const targetId = button.getAttribute('aria-controls');
+        const target = document.getElementById(targetId);
+        const content = target.querySelector('.card__collapsible-content');
+
+        if (!target || !content) return;
+
+        button.setAttribute('aria-expanded', 'false');
+
+        // 显示竖线
+        const vLine = button.querySelector('.disclosure__toggle .icon .v-line');
+        if (vLine) {
+            vLine.style.opacity = '1';
+        }
+
+        // 获取当前高度
+        const currentHeight = content.offsetHeight;
+        target.style.height = currentHeight + 'px';
+
+        // 强制重绘
+        target.offsetHeight;
+
+        // 设置为0触发过渡
+        target.style.height = '0';
+    }
+
+    // 初始化高度
+    function initializeCollapsibleHeights() {
+        const collapsibleButtons = document.querySelectorAll('[data-action="toggle-collapsible"]');
+
         collapsibleButtons.forEach(button => {
             const expanded = button.getAttribute('aria-expanded') === 'true';
             const targetId = button.getAttribute('aria-controls');
             const target = document.getElementById(targetId);
 
-            if (!expanded && target) {
+            if (!target) return;
+
+            if (!expanded) {
                 target.style.height = '0';
                 // 确保竖线显示
                 const vLine = button.querySelector('.disclosure__toggle .icon .v-line');
                 if (vLine) {
                     vLine.style.opacity = '1';
                 }
-            } else if (expanded && target) {
+            } else {
                 // 确保竖线隐藏
                 const vLine = button.querySelector('.disclosure__toggle .icon .v-line');
                 if (vLine) {
@@ -79,10 +146,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 const content = target.querySelector('.card__collapsible-content');
                 if (content) {
-                    // 延迟设置高度，确保内容已经渲染
+                    // 使用更长的延迟确保内容完全渲染
                     setTimeout(() => {
-                        target.style.height = content.offsetHeight + 'px';
-                    }, 10);
+                        const contentHeight = content.offsetHeight;
+                        if (contentHeight > 0) {
+                            target.style.height = contentHeight + 'px';
+                        } else {
+                            target.style.height = 'auto';
+                        }
+                    }, 100);
                 } else {
                     target.style.height = 'auto';
                 }
@@ -211,14 +283,32 @@ document.addEventListener('DOMContentLoaded', function () {
     initCollapsible();
     initVideoPlayer();
 
-    // 监听动态内容变化
+    // 监听动态内容变化 - 优化版本
     const observer = new MutationObserver((mutations) => {
+        let shouldReinit = false;
+
         mutations.forEach((mutation) => {
             if (mutation.addedNodes.length > 0) {
-                initCollapsible();
-                initVideoPlayer();
+                // 检查是否添加了手风琴相关元素
+                mutation.addedNodes.forEach(node => {
+                    if (node.nodeType === Node.ELEMENT_NODE) {
+                        if (node.querySelector && (
+                            node.querySelector('[data-action="toggle-collapsible"]') ||
+                            node.matches('[data-action="toggle-collapsible"]')
+                        )) {
+                            shouldReinit = true;
+                        }
+                    }
+                });
             }
         });
+
+        if (shouldReinit) {
+            // 重置初始化状态
+            isInitialized = false;
+            initCollapsible();
+            initVideoPlayer();
+        }
     });
 
     // 观察整个文档的变化
@@ -227,19 +317,26 @@ document.addEventListener('DOMContentLoaded', function () {
         subtree: true
     });
 
-    // 监听窗口大小变化，重新计算高度
+    // 监听窗口大小变化，重新计算高度 - 使用防抖
+    let resizeTimeout;
     window.addEventListener('resize', () => {
-        const expandedButtons = document.querySelectorAll('[data-action="toggle-collapsible"][aria-expanded="true"]');
-        expandedButtons.forEach(button => {
-            const targetId = button.getAttribute('aria-controls');
-            const target = document.getElementById(targetId);
-            if (target) {
-                const content = target.querySelector('.card__collapsible-content');
-                if (content) {
-                    target.style.height = content.offsetHeight + 'px';
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            const expandedButtons = document.querySelectorAll('[data-action="toggle-collapsible"][aria-expanded="true"]');
+            expandedButtons.forEach(button => {
+                const targetId = button.getAttribute('aria-controls');
+                const target = document.getElementById(targetId);
+                if (target) {
+                    const content = target.querySelector('.card__collapsible-content');
+                    if (content) {
+                        const newHeight = content.offsetHeight;
+                        if (newHeight > 0) {
+                            target.style.height = newHeight + 'px';
+                        }
+                    }
                 }
-            }
-        });
+            });
+        }, 150);
     });
 });
 

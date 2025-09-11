@@ -254,7 +254,7 @@ body .container,
   body .container,
   .page .container,
   .shopify-section .container {
-    padding: 0 var(--gutter-md, 32px);
+    padding: 0 5px;
   }
 }
 

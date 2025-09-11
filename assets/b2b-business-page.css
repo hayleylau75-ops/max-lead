@@ -81,8 +81,8 @@
 
 /* Business Types Section */
 .b2b-business-types {
-    padding: 8rem 0;
-    background-color: rgba(var(--bg-color));
+    padding: 4rem 0;
+    background-color: #fff;
 }
 
 .b2b-business-types__grid {
@@ -96,13 +96,6 @@
     background: #fff;
     border-radius: 1.2rem;
     overflow: hidden;
-    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.b2b-business-type:hover {
-    transform: translateY(-0.5rem);
-    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.15);
 }
 
 .b2b-business-type__image {
@@ -133,7 +126,7 @@
 .b2b-business-type__title {
     margin-bottom: 2.4rem;
     color: rgb(var(--heading-color));
-    font-size: 2.4rem;
+    font-size: 2rem;
     font-weight: bold;
     letter-spacing: 0.05em;
 }
@@ -146,44 +139,33 @@
 
 .b2b-business-type__features li {
     position: relative;
-    padding-left: 3rem;
     margin-bottom: 1.5rem;
     color: rgb(var(--text-color));
     font-size: 1.6rem;
-    line-height: 1.6;
+    line-height: 1.2;
 }
 
-.b2b-business-type__features li::before {
-    content: "✓";
-    position: absolute;
-    left: 0;
-    top: 0;
-    color: #22c55e;
-    font-weight: bold;
-    font-size: 1.8rem;
-}
-
-.b2b-business-type__btn {
+/* 使用更高优先级的选择器来覆盖全局样式 */
+.b2b-business-type .b2b-business-type__content .b2b-business-type__btn {
     display: inline-block;
     padding: 1.2rem 2.4rem;
     background-color: transparent;
-    color: rgb(var(--link-color));
-    border: 2px solid rgb(var(--link-color));
+    background: none;
+    color: rgb(var(--text-color));
+    border: 1.8px solid rgb(var(--text-color));
     text-decoration: none;
     font-weight: 600;
     border-radius: 0.6rem;
-    transition: all 0.3s ease;
+    transition: none;
+    cursor: pointer;
 }
 
-.b2b-business-type__btn:hover {
-    background-color: rgb(var(--link-color));
-    color: #fff;
-}
+
 
 /* Product Categories Section */
 .b2b-categories {
     padding: 8rem 0;
-    background-color: #f8fafc;
+    background-color: #fff;
 }
 
 .b2b-categories__grid {
@@ -281,7 +263,7 @@
 /* Service Map Section */
 .b2b-service-map {
     padding: 8rem 0;
-    background-color: rgba(var(--bg-color));
+    background-color: #fff;
 }
 
 .b2b-service-map__grid {

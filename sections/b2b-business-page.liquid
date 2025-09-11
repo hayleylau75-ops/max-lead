@@ -118,8 +118,12 @@
               {% endfor %}
             </ul>
             
-            <!-- 占位空间，确保与左侧卡片等高 -->
-            <div class="b2b-business-type__spacer"></div>
+            {% if section.settings.wholesale_button_text != blank %}
+              <a href="{{ section.settings.wholesale_button_url }}" 
+                 class="btn btn--secondary b2b-business-type__btn">
+                {{ section.settings.wholesale_button_text }}
+              </a>
+            {% endif %}
           </div>
         </div>
       </div>
@@ -300,6 +304,17 @@
       "id": "wholesale_title",
       "label": "Wholesale title",
       "default": "WHOLESALE (COMING SOON)"
+    },
+    {
+      "type": "text",
+      "id": "wholesale_button_text",
+      "label": "Wholesale button text",
+      "default": "WHOLESALE LOGIN"
+    },
+    {
+      "type": "url",
+      "id": "wholesale_button_url",
+      "label": "Wholesale button URL"
     },
     {
       "type": "header",

@@ -13,9 +13,6 @@
     font-size: 18px;
 }
 
-.text-48 {
-    font-size: 48px;
-}
 
 
 .b2b-section {
@@ -351,9 +348,23 @@
 }
 
 /* Responsive Design */
+@media screen and (min-width: 1024px) {
+    .b2b-hero {
+        min-height: 50rem;
+    }
+
+    .b2b-hero__title {
+        font-size: 48px
+    }
+}
+
 @media screen and (max-width: 768px) {
     .b2b-hero {
         min-height: 50rem;
+    }
+
+    .b2b-hero__title {
+        font-size: 26px
     }
 
     .b2b-hero__text {

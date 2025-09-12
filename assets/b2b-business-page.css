@@ -23,6 +23,17 @@
     padding-bottom: var(--section-padding-bottom);
 }
 
+/* 移除包含hero的section的顶部padding和margin */
+.b2b-section:has(.b2b-hero) {
+    padding-top: 0;
+    margin-top: 0;
+}
+
+/* 兼容性方案：如果:has()不支持，用负margin抵消section的margin和padding */
+.b2b-section .b2b-hero {
+    margin-top: calc(-1 * var(--section-padding-top) - 1 * var(--section-gap, 2rem) * var(--fluid-1-5, 1.5));
+}
+
 /* Hero Banner Section */
 .b2b-hero {
     position: relative;

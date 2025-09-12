@@ -164,7 +164,7 @@
 
 /* Product Categories Section */
 .b2b-categories {
-    padding: 8rem 0;
+    padding: 4rem 0;
     background-color: #fff;
 }
 
@@ -173,47 +173,28 @@
     gap: 2rem;
 }
 
-/* PC端：固定4列 */
-@media (min-width: 1200px) {
+/* 1024px以上：所有卡片一行，强制不换行 */
+@media (min-width: 1024px) {
     .b2b-categories__grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1rem;
     }
 }
 
-/* 大平板：3列 */
-@media (min-width: 900px) and (max-width: 1199px) {
-    .b2b-categories__grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-/* 小平板：2列 */
-@media (min-width: 600px) and (max-width: 899px) {
+/* 1024px以下：两个卡片一行 */
+@media (max-width: 1023px) {
     .b2b-categories__grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-/* 手机：1列 */
-@media (max-width: 599px) {
-    .b2b-categories__grid {
-        grid-template-columns: 1fr;
     }
 }
 
 .b2b-category-card {
     position: relative;
     background: #fff;
-    border-radius: 1.2rem;
+    border-radius: 0.6rem;
     overflow: hidden;
     box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.08);
-    transition: all 0.3s ease;
     cursor: pointer;
-}
-
-.b2b-category-card:hover {
-    transform: translateY(-0.5rem);
-    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.12);
 }
 
 .b2b-category-card__image {
@@ -226,11 +207,6 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.b2b-category-card:hover .b2b-category-card__image img {
-    transform: scale(1.05);
 }
 
 .b2b-category-card__placeholder {
@@ -262,7 +238,7 @@
 
 /* Service Map Section */
 .b2b-service-map {
-    padding: 8rem 0;
+    padding: 4rem 0;
     background-color: #fff;
 }
 
@@ -293,7 +269,7 @@
 .b2b-service-map__title {
     margin-bottom: 3rem;
     color: rgb(var(--heading-color));
-    font-size: 3.2rem;
+    font-size: 2.4rem;
     font-weight: bold;
     line-height: 1.3;
 }
@@ -307,17 +283,9 @@
 .b2b-service-feature {
     display: flex;
     align-items: center;
-    margin-bottom: 2.4rem;
-    padding: 2rem;
-    background: #fff;
-    border-radius: 1rem;
-    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
+    padding: 1rem 0;
 }
 
-.b2b-service-feature:hover {
-    transform: translateX(1rem);
-}
 
 .b2b-service-feature__icon {
     flex-shrink: 0;
@@ -327,14 +295,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    border-radius: 50%;
 }
 
 .b2b-service-feature__icon img {
-    width: 2.4rem;
-    height: 2.4rem;
-    filter: brightness(0) invert(1);
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .b2b-service-feature__text {

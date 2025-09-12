@@ -38,14 +38,14 @@
         {% endif %}
         
         {% if section.settings.hero_description != blank %}
-          <div class="b2b-hero__description">
+          <div class="b2b-hero__description text-16">
             {{ section.settings.hero_description }}
           </div>
         {% endif %}
         
         {% if section.settings.hero_button_text != blank %}
           <a href="{{ section.settings.hero_button_url }}" 
-             class="btn btn--primary b2b-hero__cta">
+             class="btn btn--primary b2b-hero__cta text-24">
             {{ section.settings.hero_button_text }}
           </a>
         {% endif %}
@@ -74,19 +74,19 @@
           </div>
           
           <div class="b2b-business-type__content">
-            <h2 class="b2b-business-type__title">{{ section.settings.dropshipping_title | default: 'DROPSHIPPING' }}</h2>
+            <h2 class="b2b-business-type__title text-24">{{ section.settings.dropshipping_title | default: 'DROPSHIPPING' }}</h2>
             
             <ul class="b2b-business-type__features">
               {% for block in section.blocks %}
                 {% if block.type == 'dropshipping_feature' %}
-                  <li>{{ block.settings.feature_text }}</li>
+                  <li class="text-16">{{ block.settings.feature_text }}</li>
                 {% endif %}
               {% endfor %}
             </ul>
             
             {% if section.settings.dropshipping_button_text != blank %}
               <a href="{{ section.settings.dropshipping_button_url }}" 
-                 class="btn btn--secondary b2b-business-type__btn">
+                 class="btn btn--secondary b2b-business-type__btn text-16">
                 {{ section.settings.dropshipping_button_text }}
               </a>
             {% endif %}
@@ -108,19 +108,19 @@
           </div>
           
           <div class="b2b-business-type__content">
-            <h2 class="b2b-business-type__title">{{ section.settings.wholesale_title | default: 'WHOLESALE (COMING SOON)' }}</h2>
+            <h2 class="b2b-business-type__title text-24">{{ section.settings.wholesale_title | default: 'WHOLESALE (COMING SOON)' }}</h2>
             
             <ul class="b2b-business-type__features">
               {% for block in section.blocks %}
                 {% if block.type == 'wholesale_feature' %}
-                  <li>{{ block.settings.feature_text }}</li>
+                  <li class="text-16">{{ block.settings.feature_text }}</li>
                 {% endif %}
               {% endfor %}
             </ul>
             
             {% if section.settings.wholesale_button_text != blank %}
               <a href="{{ section.settings.wholesale_button_url }}" 
-                 class="btn btn--secondary b2b-business-type__btn">
+                 class="btn btn--secondary b2b-business-type__btn text-16">
                 {{ section.settings.wholesale_button_text }}
               </a>
             {% endif %}
@@ -151,7 +151,7 @@
                 {%- endif -%}
               </div>
               
-              <h3 class="b2b-category-card__title">{{ block.settings.category_name }}</h3>
+                <h3 class="b2b-category-card__title text-16">{{ block.settings.category_name }}</h3>
               
               {% if block.settings.category_url != blank %}
                 <a href="{{ block.settings.category_url }}" 
@@ -186,7 +186,7 @@
         
         <div class="b2b-service-map__content">
           {% if section.settings.service_title != blank %}
-            <h2 class="b2b-service-map__title">{{ section.settings.service_title }}</h2>
+            <h2 class="b2b-service-map__title text-24">{{ section.settings.service_title }}</h2>
           {% endif %}
           
           <ul class="b2b-service-features">
@@ -201,7 +201,7 @@
                            height="48">
                     </div>
                   {% endif %}
-                  <span class="b2b-service-feature__text">{{ block.settings.feature_text }}</span>
+                  <span class="b2b-service-feature__text text-16">{{ block.settings.feature_text }}</span>
                 </li>
               {% endif %}
             {% endfor %}

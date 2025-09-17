@@ -136,7 +136,7 @@ tbody .product-comparison-grid__th--left::after,
 }
 
 .product-comparison-slider:not(.color-scheme) .product-comparison-grid {
-  border-bottom: 20px solid rgba(var(--bg-color-og));
+  /* border-bottom: 20px solid rgba(var(--bg-color-og)); */
 }
 
 .product-comparison-slider {

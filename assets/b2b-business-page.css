@@ -13,13 +13,14 @@
     font-size: 18px;
 }
 
-
+.text-48 {
+    font-size: 48px;
+}
 
 .b2b-section {
     padding-top: var(--section-padding-top);
     padding-bottom: var(--section-padding-bottom);
 }
-
 /* 移除包含hero的section的顶部padding和margin */
 .b2b-section:has(.b2b-hero) {
     padding-top: 0;
@@ -82,6 +83,7 @@
     line-height: 1.2;
 }
 
+
 .b2b-hero__description {
     margin-bottom: 3rem;
     color: rgb(var(--text-color));
@@ -90,23 +92,23 @@
 }
 
 .b2b-section .b2b-hero__content .b2b-hero__cta {
-    display: inline-block;
-    background: #8cc63f;
-    color: white;
-    padding: 15px 30px;
-    text-decoration: none;
-    border: 2px solid transparent;
-    border-radius: 5px;
-    font-family: "DM Sans", sans-serif;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    cursor: pointer;
+  display: inline-block;
+  background: #8cc63f;
+  color: white;
+  padding: 15px 30px;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 5px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 .b2b-section .b2b-hero__content .b2b-hero__cta:hover {
-    background: #7ab52e;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  background: #7ab52e;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 /* Business Types Section */
@@ -123,8 +125,8 @@
 }
 
 .b2b-business-type {
-    background: #fff;
-    border-radius: 1.2rem;
+    background: #F9FAFC;
+    border-radius: 0.8rem;
     overflow: hidden;
 }
 
@@ -175,7 +177,7 @@
     line-height: 1.2;
 }
 
-/* 使用更高优先级的选择器来覆盖全局样式 */
+
 .b2b-business-type .b2b-business-type__content .b2b-business-type__btn {
     display: inline-block;
     padding: 1.2rem 2.4rem;
@@ -185,13 +187,11 @@
     border: 1.8px solid rgb(var(--text-color));
     text-decoration: none;
     font-family: "DM Sans", sans-serif;
-    font-weight: 600;
+    font-weight: 700;
     border-radius: 0.6rem;
     transition: none;
     cursor: pointer;
 }
-
-
 
 /* Product Categories Section */
 .b2b-categories {
@@ -204,7 +204,7 @@
     gap: 2rem;
 }
 
-/* 1024px以上：所有卡片一行，强制不换行 */
+/* 1024px以上：所有卡片一行 */
 @media (min-width: 1024px) {
     .b2b-categories__grid {
         grid-template-columns: repeat(5, 1fr);
@@ -224,9 +224,9 @@
     background: #fff;
     border-radius: 0.6rem;
     overflow: hidden;
-    box-shadow: 0 0.5rem 2rem rgba(0, 0, 0, 0.08);
     cursor: pointer;
 }
+
 
 .b2b-category-card__image {
     height: 18rem;
@@ -250,9 +250,9 @@
 }
 
 .b2b-category-card__title {
-    padding: 2rem;
+    padding: 1rem;
     margin: 0;
-    color: rgb(var(--heading-color));
+    color: #2c3e50;
     font-family: "DM Sans", sans-serif;
     font-weight: 600;
     text-align: center;
@@ -322,7 +322,6 @@
     flex-shrink: 0;
     width: 4.8rem;
     height: 4.8rem;
-    margin-right: 2rem;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -353,18 +352,13 @@
         min-height: 50rem;
     }
 
-    .b2b-hero__title {
-        font-size: 48px
+    .b2b-hero__title{
+        font-size:48px
     }
 }
-
 @media screen and (max-width: 768px) {
     .b2b-hero {
         min-height: 50rem;
-    }
-
-    .b2b-hero__title {
-        font-size: 26px
     }
 
     .b2b-hero__text {
@@ -372,6 +366,9 @@
         margin: 0 2rem;
     }
 
+    .b2b-hero__title{
+        font-size:26px
+    }
 
     .b2b-business-types__grid {
         grid-template-columns: 1fr;

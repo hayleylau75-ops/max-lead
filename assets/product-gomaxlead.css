@@ -1,5 +1,55 @@
 /* 专门用于gomaxlead910产品页面的样式文件 */
 
+/* 产品页面包装容器白色背景 - 覆盖整个产品页面内容 */
+.product-layout-wrapper {
+    background-color: #ffffff !important;
+    min-height: 100vh;
+    position: relative;
+    z-index: 1;
+}
+
+/* 确保整个页面背景是白色 */
+body.template-product {
+    background-color: #ffffff !important;
+}
+
+/* 覆盖主题的CSS变量设置，确保产品页面背景正确 */
+body.template-product {
+    --bg-color: 255 255 255 !important;
+    /* 对应 #ffffff */
+}
+
+/* 确保所有使用 --bg-color 的元素都使用正确的背景色 */
+body.template-product .color-scheme {
+    background-color: rgba(255, 255, 255) !important;
+}
+
+/* 产品主区域样式调整 */
+.product-main {
+    background-color: transparent !important;
+}
+
+/* 产品信息区域样式调整 */
+.product-main .product-info {
+    background-color: transparent !important;
+    position: relative;
+}
+
+/* 产品媒体区域样式调整 */
+.product-main .product-media {
+    background-color: transparent !important;
+}
+
+/* 其他产品相关区域样式调整 */
+.product-details,
+.product-features,
+.product-comparison-grid,
+.collection-list,
+.image-banner,
+.recommendations {
+    background-color: transparent !important;
+}
+
 .product-main:has(custom-select.is-open) {
     position: relative;
     z-index: 4;
@@ -79,6 +129,11 @@
     color: rgb(var(--text-color));
 }
 
+/* 产品页面媒体按钮背景色修复 */
+body.template-product .media-poster__btn {
+    background-color: #ffffff !important;
+}
+
 .media-poster__btn>.icon {
     width: 40%;
     height: 40%;
@@ -155,6 +210,12 @@
     border-radius: var(--btn-border-radius, 0);
     background-color: rgba(var(--bg-color));
     color: rgb(var(--text-color));
+}
+
+/* 产品页面媒体控制按钮背景色修复 */
+body.template-product .media-ctrl__btn,
+body.template-product .media-ctrl__counter {
+    background-color: #ffffff !important;
 }
 
 .media-ctrl__btn {
@@ -239,13 +300,6 @@ product-model[loaded] .media-poster {
         overflow: hidden;
     }
 
-        /* 确保面包屑容器不被flex布局影响 */
-    .product-breadcrumbs {
-        width: 100% !important;
-        clear: both !important;
-        display: block !important;
-    }
-
     .product-breadcrumbs+.product-main .product-media,
     .product-breadcrumbs+.product-main .product-info {
         padding-top: 0;
@@ -297,6 +351,11 @@ product-model[loaded] .media-poster {
         background-color: rgba(var(--bg-color));
     }
 
+    /* 产品页面产品信息区域背景色修复 */
+    body.template-product .product-main .product-info {
+        background-color: transparent !important;
+    }
+
     .product-main .product-info::before,
     .product-main .product-info::after {
         content: "";
@@ -306,6 +365,11 @@ product-model[loaded] .media-poster {
         left: -1px;
         width: 1px;
         background-color: rgba(var(--bg-color));
+    }
+
+    /* 产品页面产品信息区域伪元素背景色修复 */
+    body.template-product .product-main .product-info::before {
+        background-color: #ffffff !important;
     }
 
     .product-main .product-info::after {

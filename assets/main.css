@@ -3972,7 +3972,7 @@ details-disclosure+details-disclosure .disclosure--row {
 }
 
 .price__current {
-  color: #00BADB;
+  color: #00BADB; 
   padding-inline-end: 0.5rem;
   font-size: 1em;
   font-weight: bold;

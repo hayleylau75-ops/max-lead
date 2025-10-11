@@ -592,6 +592,7 @@
               </product-message>
             {%- endif -%}
 
+
           {%- when 'coupon-code' -%}
             <div class="coupon-code-box product-info__block product-info__block--sm">
               {% render 'coupon-code',
@@ -743,6 +744,8 @@
                 })
               </script>
             {% endif %}
+          
+
 
           {%- when 'description' -%}
             {%- if block.settings.show_as_collapsible_content -%}
@@ -2492,7 +2495,7 @@
       ]
     },
     {
-      "type": "coupon-code",
+            "type": "coupon-code",
       "name": "Coupon Code"
     },
     {
@@ -2647,6 +2650,7 @@
           "info": "One option on each line"
         }
       ]
+      
     }
   ]
 }

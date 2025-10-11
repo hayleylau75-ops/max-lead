@@ -240,7 +240,6 @@ body.product-template .cc-main-product+.shopify-app-block {
   justify-content: flex-start;
   align-items: center;
 }
-
 /* reset default paragraph spacing inside inline text container */
 .sub_block_content_text1 p {
   margin: 0;
@@ -292,7 +291,7 @@ body.product-template .cc-main-product+.shopify-app-block {
   left: 50%;
   transform: translate(-50%, -50%);
   line-height: 1.2;
-  z-index: 999999999;
+  z-index: 999999999 !important;
 }
 
 .nosub_pop_content {
@@ -515,7 +514,8 @@ body.product-template .cc-main-product+.shopify-app-block {
   }
 }
 
-/* Tab icons styling */
+
+/* product-gomaxlead detalis Tab icons styling */
 .tab-icon {
   width: 32px;
   height: 32px;

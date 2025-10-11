@@ -29,23 +29,23 @@
         {%- when 'tabs' -%}
           {%- liquid
             assign tabs = ''
-            if block.settings.show_description
-              assign tabs = ',0'
+            if block.settings.tab_2_title != blank or block.settings.tab_2_page.title != blank
+              assign tabs = tabs | append: ',2'
             endif
             if block.settings.show_specification
               assign tabs = tabs | append: ',4'
             endif
-            if block.settings.show_reviews
-              assign tabs = tabs | append: ',5'
-            endif
             if block.settings.tab_1_title != blank or block.settings.tab_1_page.title != blank
               assign tabs = tabs | append: ',1'
             endif
-            if block.settings.tab_2_title != blank or block.settings.tab_2_page.title != blank
-              assign tabs = tabs | append: ',2'
+            if block.settings.show_reviews
+              assign tabs = tabs | append: ',5'
             endif
             if block.settings.tab_3_title != blank or block.settings.tab_3_page.title != blank
               assign tabs = tabs | append: ',3'
+            endif
+            if block.settings.show_description
+              assign tabs = tabs | append: ',0'
             endif
             assign tab_indices = tabs | remove_first: ',' | split: ','
           -%}
@@ -163,22 +163,29 @@
               {%- for i in tab_indices -%}
                 {%- liquid
                   assign prevent_tab_render = false
+                  assign tab_icon = blank
 
                   if i == '0'
                     assign title = 'products.product.description' | t
+                    assign tab_icon = block.settings.description_icon
                   elsif i == '4' and specification == blank
                     assign title = 'products.product.specification' | t
                     assign prevent_tab_render = true
+                    assign tab_icon = block.settings.specification_icon
                   elsif i == '4'
                     assign title = 'products.product.specification' | t
+                    assign tab_icon = block.settings.specification_icon
                   elsif i == '5' and block.settings.show_reviews
                     assign rating_count = product.metafields.reviews.rating_count | plus: 0
                     assign title = 'products.product.reviews' | t | append: ' (' | append: rating_count | append: ')'
+                    assign tab_icon = block.settings.reviews_icon
                   else
                     assign title_id = 'tab_' | append: i | append: '_title'
                     assign text_id = 'tab_' | append: i | append: '_text'
                     assign page_id = 'tab_' | append: i | append: '_page'
+                    assign icon_id = 'tab_' | append: i | append: '_icon'
                     assign title = block.settings[title_id] | default: block.settings[page_id].title
+                    assign tab_icon = block.settings[icon_id]
                   endif
                 -%}
 
@@ -187,7 +194,12 @@
                     <details class="disclosure disclosure--row"{% if first_tab_rendered == false and block.settings.open_first %} open{% endif %}>
                       <summary>
                         <div class="flex justify-between items-center">
-                          <h2 class="disclosure__title h5 mb-0">{{ title }}</h2>
+                          <h2 class="disclosure__title h5 mb-0 flex items-center gap-2">
+                            {%- if tab_icon != blank -%}
+                              <img src="{{ tab_icon | image_url: width: 48 }}" alt="{{ title | escape }}" class="tab-icon" width="32" height="32">
+                            {%- endif -%}
+                            {{ title }}
+                          </h2>
                           <span class="disclosure__toggle">
                             {%- if settings.disclosure_toggle == 'plus' -%}
                               {% render 'icon-plus' %}
@@ -199,7 +211,7 @@
                       </summary>
                       <div class="disclosure__panel has-motion">
                         <div class="disclosure__content{% unless i == "4" %} rte product-description{% endunless %}">
-                          {%- if forloop.first and block.settings.show_description -%}
+                          {%- if i == "0" and block.settings.show_description -%}
                             {{ product.description }}
                           {%- elsif i == "4"  and specification != blank -%}
                             <ul class="product-spec">
@@ -227,7 +239,10 @@
                 {%- else -%}
                   {%- capture tab_btns -%}
                     {{ tab_btns }}
-                    <button type="button" class="tablist__tab font-bold" id="tab-{{ i }}" role="tab" aria-controls="panel-{{ i }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                    <button type="button" class="tablist__tab font-bold flex items-center gap-2" id="tab-{{ i }}" role="tab" aria-controls="panel-{{ i }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+                      {%- if tab_icon != blank -%}
+                        <img src="{{ tab_icon | image_url: width: 48 }}" alt="{{ title | escape }}" class="tab-icon" width="32" height="32">
+                      {%- endif -%}
                       {{ title }}
                     </button>
                   {%- endcapture -%}
@@ -247,7 +262,7 @@
                       assign page_id = 'tab_' | append: i | append: '_page'
                     -%}
                     <div id="panel-{{ i }}" role="tabpanel" tabindex="0" aria-labelledby="tab-{{ i }}"{% unless forloop.first %} hidden{% endunless %}>
-                      {%- if forloop.first and block.settings.show_description -%}
+                      {%- if i == "0" and block.settings.show_description -%}
                         <div class="rte product-description">
                           {{ product.description }}
                         </div>
@@ -474,6 +489,11 @@
           "default": true
         },
         {
+          "type": "image_picker",
+          "id": "description_icon",
+          "label": "Description tab icon"
+        },
+        {
           "type": "header",
           "content": "Reviews tab"
         },
@@ -482,6 +502,11 @@
           "id": "show_reviews",
           "label": "Show reviews tab",
           "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "reviews_icon",
+          "label": "Reviews tab icon"
         },
         {
           "type": "liquid",
@@ -502,6 +527,11 @@
           "id": "show_specification",
           "label": "Show specifications tab",
           "default": false
+        },
+        {
+          "type": "image_picker",
+          "id": "specification_icon",
+          "label": "Specifications tab icon"
         },
         {
           "type": "textarea",
@@ -544,6 +574,11 @@
           "label": "Title"
         },
         {
+          "type": "image_picker",
+          "id": "tab_1_icon",
+          "label": "Tab 1 icon"
+        },
+        {
           "type": "richtext",
           "id": "tab_1_text",
           "label": "Content"
@@ -563,6 +598,11 @@
           "label": "Title"
         },
         {
+          "type": "image_picker",
+          "id": "tab_2_icon",
+          "label": "Tab 2 icon"
+        },
+        {
           "type": "richtext",
           "id": "tab_2_text",
           "label": "Content"
@@ -580,6 +620,11 @@
           "type": "text",
           "id": "tab_3_title",
           "label": "Title"
+        },
+        {
+          "type": "image_picker",
+          "id": "tab_3_icon",
+          "label": "Tab 3 icon"
         },
         {
           "type": "richtext",

@@ -1,0 +1,554 @@
+{%- liquid
+  assign color_scheme = section.settings.color_scheme
+-%}
+
+<div class="container" id="{{ section.id }}">
+  <div class="section">
+    <div class="product-details-simple">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          {%- when 'highlight-text' -%}
+            {%- liquid
+            assign last_section_index = forloop.index0 | minus: 1
+            assign next_section_index = forloop.index
+            assign last_section_was_highlight = false
+            assign next_section_is_highlight = false
+            
+            if last_section_index > -1 and section.blocks[last_section_index].type == 'highlight-text'
+            assign last_section_was_highlight = true
+            endif
+            
+            if section.blocks[next_section_index].type == 'highlight-text'
+            assign next_section_is_highlight = true
+            endif
+            -%}
+            
+            {%- if last_section_was_highlight == false and next_section_is_highlight -%}
+              <div class="product-details__block product-details__highlight-grid grid sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
+              {%- endif -%}
+              
+            {%- if block.settings.title != blank or block.settings.text != blank -%}
+              <div class="{% unless last_section_was_highlight or next_section_is_highlight %}product-details__block {% endunless %}product-details__highlight text-center" {{ block.shopify_attributes }}>
+                {%- if block.settings.title != blank -%}
+                  <p class="h4">{{- block.settings.title | escape -}}</p>
+                {%- endif -%}
+                {%- if block.settings.text != blank -%}
+                  <div class="rte large-text">{{ block.settings.text }}</div>
+                {%- endif -%}
+              </div>
+            {%- endif -%}
+
+            {%- if last_section_was_highlight and next_section_is_highlight == false -%}
+              </div>
+            {%- endif -%}
+          
+          {%- when 'tabs' -%}
+            <div class="tabs" {{ block.shopify_attributes }}>
+              {%- if block.settings.show_tab_titles -%}
+                <div class="tabs__nav" id="tabs-nav">
+                {%- if block.settings.show_description -%}
+                  <button class="tabs__nav-item active" data-tab="description">Description</button>
+                {%- endif -%}
+                {%- if block.settings.show_reviews -%}
+                  <button class="tabs__nav-item" data-tab="reviews">Reviews</button>
+                {%- endif -%}
+                {%- if block.settings.show_specification -%}
+                  <button class="tabs__nav-item" data-tab="specification">Specification</button>
+                {%- endif -%}
+                {%- if block.settings.tab_1_title != blank and block.settings.show_tab_1 -%}
+                  <button class="tabs__nav-item" data-tab="tab1">{{ block.settings.tab_1_title }}</button>
+                {%- endif -%}
+                {%- if block.settings.tab_2_title != blank and block.settings.show_tab_2 -%}
+                  <button class="tabs__nav-item" data-tab="tab2">{{ block.settings.tab_2_title }}</button>
+                {%- endif -%}
+                {%- if block.settings.tab_3_title != blank and block.settings.show_tab_3 -%}
+                  <button class="tabs__nav-item" data-tab="tab3">{{ block.settings.tab_3_title }}</button>
+                {%- endif -%}
+                </div>
+              {%- endif -%}
+              
+              <div class="tabs__content">
+                {%- assign first_tab_active = true -%}
+                {%- if block.settings.show_description -%}
+                  <div class="tabs__panel{% if block.settings.show_tab_titles == false and first_tab_active %} active{% endif %}" id="description">
+                    <div class="rte">{{ product.description }}</div>
+                  </div>
+                  {%- assign first_tab_active = false -%}
+                {%- endif -%}
+                
+                {%- if block.settings.show_reviews -%}
+                  <div class="tabs__panel{% if block.settings.show_tab_titles == false and first_tab_active %} active{% endif %}" id="reviews">
+                    <div class="rte">{{ block.settings.custom_reviews }}</div>
+                  </div>
+                  {%- assign first_tab_active = false -%}
+                {%- endif -%}
+                
+                {%- if block.settings.show_specification -%}
+                  <div class="tabs__panel{% if block.settings.show_tab_titles == false and first_tab_active %} active{% endif %}" id="specification">
+                    <div class="product-specs">
+                      {%- assign spec_metafields = block.settings.spec_metafields | split: '\n' -%}
+                      {%- for spec in spec_metafields -%}
+                        {%- assign spec_parts = spec | split: ':' -%}
+                        {%- if spec_parts.size == 2 -%}
+                          {%- assign field_name = spec_parts[0] | strip -%}
+                          {%- assign metafield_key = spec_parts[1] | strip -%}
+                          {%- assign metafield_value = product.metafields[metafield_key] -%}
+                          {%- if metafield_value != blank or block.settings.spec_show_empty_metafields -%}
+                            <div class="product-spec">
+                              <dt class="product-spec__name">{{ field_name }}</dt>
+                              <dd class="product-spec__value">
+                                {%- if metafield_value != blank -%}
+                                  {{ metafield_value }}
+                                {%- else -%}
+                                  {{ block.settings.spec_empty_field_text }}
+                                {%- endif -%}
+                              </dd>
+                            </div>
+                          {%- endif -%}
+                        {%- endif -%}
+                      {%- endfor -%}
+                    </div>
+                  </div>
+                  {%- assign first_tab_active = false -%}
+                {%- endif -%}
+                
+                {%- if block.settings.tab_1_title != blank and block.settings.show_tab_1 -%}
+                  <div class="tabs__panel{% if block.settings.show_tab_titles == false and first_tab_active %} active{% endif %}" id="tab1">
+                    <div class="rte">{{ block.settings.tab_1_text }}</div>
+                  </div>
+                  {%- assign first_tab_active = false -%}
+                {%- endif -%}
+                
+                {%- if block.settings.tab_2_title != blank and block.settings.show_tab_2 -%}
+                  <div class="tabs__panel{% if block.settings.show_tab_titles == false and first_tab_active %} active{% endif %}" id="tab2">
+                    <div class="rte">{{ block.settings.tab_2_text }}</div>
+                  </div>
+                  {%- assign first_tab_active = false -%}
+                {%- endif -%}
+                
+                {%- if block.settings.tab_3_title != blank and block.settings.show_tab_3 -%}
+                  <div class="tabs__panel{% if block.settings.show_tab_titles == false and first_tab_active %} active{% endif %}" id="tab3">
+                    <div class="rte">{{ block.settings.tab_3_text }}</div>
+                  </div>
+                  {%- assign first_tab_active = false -%}
+                {%- endif -%}
+              </div>
+            </div>
+          
+          {%- when 'payment-methods' -%}
+            <div class="product-details__block panel" {{ block.shopify_attributes }}>
+              {%- if block.settings.title != blank -%}
+                <h3 class="h5 mb-6">{{- block.settings.title | escape -}}</h3>
+              {%- endif -%}
+
+              {%- if block.settings.title1 != blank -%}
+                <p class="h6 regular-text mb-4" id="payment-methods-title">{{- block.settings.title1 | escape -}}</p>
+              {%- endif -%}
+
+              {%- if block.settings.show_payment_icons -%}
+                <div class="mb-4">
+                  <ul class="payment-icons flex flex-wrap" role="list" {%- if block.settings.title1 != blank -%}aria-labelledby="payment-methods-title"{% endif %}>
+                    {%- for type in shop.enabled_payment_types -%}
+                      <li>{{ type | payment_type_svg_tag: class: 'payment-icon' }}</li>
+                    {%- endfor -%}
+                  </ul>
+                </div>
+              {%- endif -%}
+
+              {%- if block.settings.text1 != blank -%}
+                <div class="rte mb-4">{{ block.settings.text1 }}</div>
+              {%- endif -%}
+            </div>
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+<style>
+  .product-details-simple {
+    padding: 2rem 0;
+  }
+  
+  
+  .tabs__controls {
+    margin-bottom: 1rem;
+  }
+  
+  
+  .tabs__nav {
+    display: flex;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 1rem;
+  }
+  
+  .tabs__nav.hidden {
+    display: none;
+  }
+  
+  .tabs__nav-item {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
+    font-size: 1.8rem;
+    font-weight: 500;
+  }
+  
+  /* Mobile responsive styles for tabs */
+  @media (max-width: 768px) {
+    .tabs__nav {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    
+    .tabs__nav-item {
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      flex: 1;
+      min-width: 0;
+      text-align: center;
+      white-space: normal;
+      word-wrap: break-word;
+      line-height: 1.2;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .tabs__nav {
+      flex-direction: column;
+      gap: 0.25rem;
+      margin-bottom: 1rem;
+    }
+    
+    .tabs__nav::before {
+      content: "点击下方标签查看不同内容";
+      display: block;
+      font-size: 0.875rem;
+      color: #6c757d;
+      text-align: center;
+      margin-bottom: 0.75rem;
+      padding: 0.5rem;
+      background: #f8f9fa;
+      border-radius: 6px;
+      border: 1px dashed #dee2e6;
+    }
+    
+    .tabs__nav-item {
+      padding: 0.75rem 1rem;
+      font-size: 0.95rem;
+      font-weight: 500;
+      flex: none;
+      width: 100%;
+      text-align: left;
+      white-space: normal;
+      word-wrap: break-word;
+      line-height: 1.3;
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: 8px;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .tabs__nav-item:hover {
+      background: #e9ecef;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    
+    .tabs__nav-item.active {
+      background: #007bff;
+      color: white;
+      border-color: #007bff;
+      box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+    }
+    
+    .tabs__nav-item::after {
+      content: "→";
+      position: absolute;
+      right: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      color: #6c757d;
+      transition: all 0.3s ease;
+    }
+    
+    .tabs__nav-item.active::after {
+      content: "✓";
+      color: white;
+    }
+    
+    .tabs__nav-item:hover::after {
+      transform: translateY(-50%) translateX(2px);
+    }
+  }
+  
+  .tabs__nav-item:hover,
+  .tabs__nav-item.active {
+    border-bottom-color: #007bff;
+    color: #007bff;
+  }
+  
+  .tabs__panel {
+    display: none;
+  }
+  
+  .tabs__panel.active {
+    display: block;
+  }
+  
+  .product-specs {
+    display: grid;
+    gap: 0.5rem;
+  }
+  
+  .product-spec {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .product-spec__name {
+    font-weight: 600;
+  }
+  
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const tabItems = document.querySelectorAll('.tabs__nav-item');
+    const tabPanels = document.querySelectorAll('.tabs__panel');
+    
+    // Initialize: activate the first tab if tabs are visible
+    const firstActiveTab = document.querySelector('.tabs__nav-item.active');
+    if (firstActiveTab) {
+      const firstTabId = firstActiveTab.getAttribute('data-tab');
+      const firstPanel = document.getElementById(firstTabId);
+      if (firstPanel) {
+        firstPanel.classList.add('active');
+      }
+    }
+    
+    // Tab switching functionality
+    tabItems.forEach(item => {
+      item.addEventListener('click', function() {
+        const targetTab = this.getAttribute('data-tab');
+        
+        // Remove active class from all items and panels
+        tabItems.forEach(tab => tab.classList.remove('active'));
+        tabPanels.forEach(panel => panel.classList.remove('active'));
+        
+        // Add active class to clicked item and corresponding panel
+        this.classList.add('active');
+        const targetPanel = document.getElementById(targetTab);
+        if (targetPanel) {
+          targetPanel.classList.add('active');
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Details Simple",
+  "class": "cc-product-details-simple section",
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "default": "scheme-1"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "highlight-text",
+      "name": "Highlight Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text"
+        }
+      ]
+    },
+    {
+      "type": "tabs",
+      "name": "Tabs",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_tab_titles",
+          "label": "Show tab titles",
+          "default": true,
+          "info": "Toggle to show or hide tab titles"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_description",
+          "label": "Show Description",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_reviews",
+          "label": "Show Reviews",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_specification",
+          "label": "Show Specification",
+          "default": true
+        },
+        {
+          "type": "textarea",
+          "id": "spec_metafields",
+          "label": "Specification Metafields",
+          "info": "Format: Field Name: metafield.key (one per line)"
+        },
+        {
+          "type": "checkbox",
+          "id": "spec_show_empty_metafields",
+          "label": "Show Empty Metafields",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "spec_empty_field_text",
+          "label": "Empty Field Text",
+          "default": "-"
+        },
+        {
+          "type": "header",
+          "content": "Tab 1"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tab_1",
+          "label": "Show Tab 1",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "tab_1_title",
+          "label": "Tab 1 Title"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_1_text",
+          "label": "Tab 1 Text"
+        },
+        {
+          "type": "header",
+          "content": "Tab 2"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tab_2",
+          "label": "Show Tab 2",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "tab_2_title",
+          "label": "Tab 2 Title"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_2_text",
+          "label": "Tab 2 Text"
+        },
+        {
+          "type": "header",
+          "content": "Tab 3"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_tab_3",
+          "label": "Show Tab 3",
+          "default": true
+        },
+        {
+          "type": "text",
+          "id": "tab_3_title",
+          "label": "Tab 3 Title"
+        },
+        {
+          "type": "richtext",
+          "id": "tab_3_text",
+          "label": "Tab 3 Text"
+        },
+        {
+          "type": "header",
+          "content": "Reviews"
+        },
+        {
+          "type": "richtext",
+          "id": "custom_reviews",
+          "label": "Custom Reviews"
+        }
+      ]
+    },
+    {
+      "type": "payment-methods",
+      "name": "Payment Methods",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Payment & Security"
+        },
+        {
+          "type": "text",
+          "id": "title1",
+          "label": "Subtitle",
+          "default": "Payment methods"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_payment_icons",
+          "label": "Show Payment Icons",
+          "default": true
+        },
+        {
+          "type": "richtext",
+          "id": "text1",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Details Simple",
+      "blocks": [
+        {
+          "type": "highlight-text"
+        },
+        {
+          "type": "tabs"
+        },
+        {
+          "type": "payment-methods"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

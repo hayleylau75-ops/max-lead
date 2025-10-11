@@ -81,6 +81,24 @@
                         "close": "once",
                         "show_over_media": false
                     }
+                },
+                "coupon-code": {
+                    "type": "coupon-code",
+                    "settings": {}
+                },
+                "sub_pop": {
+                    "type": "sub_pop",
+                    "settings": {
+                        "icon": "shopify:\/\/shop_images\/New_shortcut.lnk.png",
+                        "text1": "<p>Get an EXTRA <strong>$10<\/strong> OFF combined coupon. <\/p>",
+                        "text1_m": "<p>Save EXTRA $10<\/p>",
+                        "text2": "Enter your email",
+                        "text3": "Welcome!",
+                        "text4": "<p>Enter your email address to get an <strong>EXTRA $10 OFF<\/strong> coupon code.<\/p><p>And you can <strong>combine <\/strong>it with coupon code [20THQTMAX] when you checkout. <\/p><p><em>*Selected items only and T&Cs apply.<\/em><\/p>",
+                        "text5": "EXTRA $10 OFF",
+                        "text6": "<p>Code: [WELCOME]<\/p>",
+                        "text7": "<p>Combine <strong>[WELCOME]<\/strong> with coupon<br\/>code <strong>[20THQTMAX]<\/strong> when you checkout.<\/p>"
+                    }
                 }
             },
             "block_order": [
@@ -92,6 +110,8 @@
                 "variant-picker",
                 "divider-1",
                 "buy-buttons",
+                "coupon-code",
+                "sub_pop",
                 "message-1",
                 "message-2",
                 "collapsible-content-1",
@@ -111,18 +131,98 @@
             "blocks": {
                 "highlight-text": {
                     "type": "highlight-text",
-                    "settings": {}
+                    "settings": {
+                        "title": "{{ product.metafields.custom.highlight_text1.value.title.value }}",
+                        "text": "<p></p><p>{{ product.metafields.custom.highlight_text1.value.text | metafield_tag }}</p>"
+                    }
                 },
                 "tabs": {
                     "type": "tabs",
                     "settings": {
                         "style": "collapsible",
-                        "show_description": true
+                        "open_first": true,
+                        "show_description": true,
+                        "show_reviews": true,
+                        "custom_reviews": "",
+                        "show_specification": true,
+                        "spec_metafields": "Brand: custom.brand\nDimensions: custom.dimensions\nProduct Material: custom.product_material\nFinish Types: custom.finish_types\nLoad Capacity: custom.load_capacity\nItem Weight: custom.weight\nPackage Include: custom.package_include\nWarranty: custom.warranty",
+                        "spec_right_align": false,
+                        "spec_show_empty_metafields": false,
+                        "spec_empty_field_text": "-",
+                        "tab_1_title": "Quick Guide & Support",
+                        "tab_1_text": "<p>{{ product.metafields.custom.quick_guide_support.value }}</p>",
+                        "tab_1_page": "",
+                        "tab_2_title": "Features",
+                        "tab_2_text": "{{ product.metafields.custom.features | metafield_tag }}",
+                        "tab_2_page": "",
+                        "tab_3_title": "",
+                        "tab_3_text": "",
+                        "tab_3_page": ""
                     }
                 },
                 "payment-methods": {
                     "type": "payment-methods",
-                    "settings": {}
+                    "settings": {
+                        "title": "Payment & Security",
+                        "title1": "Payment methods",
+                        "show_payment_icons": true,
+                        "text1": "<p>Your payment information is processed securely. We do not store credit card details nor have access to your credit card information.</p>",
+                        "title2": "",
+                        "text2": ""
+                    }
+                }
+            },
+            "block_order": [
+                "highlight-text",
+                "tabs",
+                "payment-methods"
+            ],
+            "settings": {}
+        },
+        "details-duplicate": {
+            "type": "product-details-simple",
+            "blocks": {
+                "highlight-text": {
+                    "type": "highlight-text",
+                    "settings": {
+                        "title": "{{ product.metafields.custom.highlight_text1.value.title.value }}",
+                        "text": "<p></p><p>{{ product.metafields.custom.highlight_text1.value.text | metafield_tag }}</p>"
+                    }
+                },
+                "tabs": {
+                    "type": "tabs",
+                    "settings": {
+                        "style": "",
+                        "open_first": true,
+                        "show_description": true,
+                        "show_reviews": true,
+                        "custom_reviews": "",
+                        "show_specification": true,
+                        "spec_metafields": "Brand: custom.brand\nDimensions: custom.dimensions\nProduct Material: custom.product_material\nFinish Types: custom.finish_types\nLoad Capacity: custom.load_capacity\nItem Weight: custom.weight\nPackage Include: custom.package_include\nWarranty: custom.warranty",
+                        "spec_right_align": false,
+                        "spec_show_empty_metafields": false,
+                        "spec_empty_field_text": "-",
+                        "tab_1_title": "Quick Guide & Support",
+                        "tab_1_text": "<p>{{ product.metafields.custom.quick_guide_support.value }}</p>",
+                        "tab_1_page": "",
+                        "tab_2_title": "Features",
+                        "tab_2_text": "{{ product.metafields.custom.features | metafield_tag }}",
+                        "tab_2_page": "",
+                        "tab_3_title": "",
+                        "tab_3_text": "",
+                        "tab_3_page": ""
+                    }
+                },
+                "payment-methods": {
+                    "type": "payment-methods",
+                    "settings": {
+                        "title": "Payment & Security",
+                        "title1": "Payment methods",
+                        "show_payment_icons": true,
+                        "text1": "<p>Your payment information is processed securely. We do not store credit card details nor have access to your credit card information.</p>",
+                        "title2": "",
+                        "text2": ""
+                    }
                 }
             },
             "block_order": [
@@ -288,6 +388,7 @@
     },
     "order": [
         "main",
+        "details-duplicate",
         "details",
         "product-features",
         "product-comparison-grid",

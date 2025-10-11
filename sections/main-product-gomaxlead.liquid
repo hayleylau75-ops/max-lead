@@ -592,6 +592,158 @@
               </product-message>
             {%- endif -%}
 
+          {%- when 'coupon-code' -%}
+            <div class="coupon-code-box product-info__block product-info__block--sm">
+              {% render 'coupon-code',
+                codename: product.metafields.custom.code_name,
+                codevalue: product.metafields.custom.code_discount_value
+              %}
+            </div>
+
+          {%- when 'sub_pop' -%}
+            {% liquid
+              assign hasSub_pop = false
+              for coll in product.collections
+                if coll.handle == 'selected-items-for-pdp-subscribe'
+                  assign hasSub_pop = true
+                  break
+                endif
+              endfor
+            %}
+            {% if hasSub_pop %}
+              <div class="sub_pop_block">
+                <div class="sub_block_content">
+                  <span class="sub_block_content_text1">
+                    <div>{%- render 'image', image: block.settings.icon -%}</div>
+                    <span class="d-m-none">{{- block.settings.text1 -}}</span>
+                    <span class="d-lg-none">{{- block.settings.text1_m -}}</span>
+                  </span>
+                  <span class="sub_block_content_text2">{{ block.settings.text2 }}</span>
+                </div>
+              </div>
+              <div class="sub_pop_box">
+                <div class="sub_pop_container">
+                  <div class="sub_pop_box_close">
+                    {% render 'icon-close' %}
+                  </div>
+                  <div class="nosub_pop_content">
+                    <div class="nosub_pop_content_text1">{{ block.settings.text3 }}</div>
+                    <div class="nosub_pop_content_text2">{{ block.settings.text4 }}</div>
+                    <div class="nosub_pop_content_form_content">
+                      <form class="nosub_pop_content_form">
+                        <input type="email" name="email" required placeholder="Enter Email">
+                        <button class="nosub_pop_content_form_submit">Submit</button>
+                      </form>
+                      <form
+                        style="display:none;"
+                        method="post"
+                        id="mc-embedded-subscribe-form"
+                        name="mc-embedded-subscribe-form"
+                        class="validate"
+                        target="_blank"
+                      >
+                        <div id="mc_embed_signup_scroll">
+                          <h2>Subscribe</h2>
+                          <div class="indicates-required"><span class="asterisk">*</span> indicates required</div>
+                          <div class="mc-field-group">
+                            <label for="mce-EMAIL"
+                              >Enter your email for $10 OFF on your first order
+                              <span class="asterisk">*</span></label
+                            ><input
+                              type="email"
+                              name="EMAIL"
+                              class="required email"
+                              id="mce-EMAIL"
+                              required=""
+                              value=""
+                            >
+                          </div>
+                          <input type="hidden" name="tags" value="4282338">
+                          <div id="mce-responses" class="clear">
+                            <div class="response" id="mce-error-response" style="display: none;"></div>
+                            <div class="response" id="mce-success-response" style="display: none;"></div>
+                          </div>
+                          <div style="position: absolute; left: -5000px;" aria-hidden="true">
+                            <input
+                              type="text"
+                              name="b_c1f18c6df5eeddfdbf6e3c0f4_6518e1a392"
+                              tabindex="-1"
+                              value=""
+                            >
+                          </div>
+                          <div class="clear">
+                            <input
+                              type="submit"
+                              name="subscribe"
+                              id="mc-embedded-subscribe"
+                              class="button"
+                              value="Subscribe"
+                            >
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="sub_pop_content">
+                    <div class="sub_pop_content_text1">{{ block.settings.text5 }}</div>
+                    <div class="heading sub_pop_content_text2">{{ block.settings.text6 }}</div>
+                    <div class="sub_pop_content_text3">{{ block.settings.text7 }}</div>
+                  </div>
+                </div>
+              </div>
+              <script src="{{ 'mailchimp-ajax.js' | asset_url }}" defer></script>
+              <script>
+                $(document).ready(function(){
+                  var isSubscribe = localStorage.getItem("isSubscribeBlock") || null;
+
+                  if(isSubscribe == "true"){
+                    $(".sub_pop_box").addClass("successful")
+                  }else{
+                    $(".sub_pop_box").removeClass("successful")
+                  }
+                  $(".sub_pop_box").click(function(){
+                    $("body").removeClass("popshow")
+                    $("html").removeClass("popshow")
+                    $(this).css('display', 'none')
+                  })
+                  $(".sub_pop_container").click(function(e){
+                     e.stopPropagation();
+                  })
+                  $(".sub_pop_box_close").click(function(){
+                    $("body").removeClass("popshow")
+                    $("html").removeClass("popshow")
+                    $(".sub_pop_box").css('display', 'none')
+                  })
+                 $(".sub_block_content").click(function(){
+                    $("body").addClass("popshow")
+                    $("html").addClass("popshow")
+                    // 将弹窗移动到body的直接子元素以确保最高层级
+                    $(".sub_pop_box").appendTo("body").css('display', 'block').fadeIn()
+                 })
+                  $(".nosub_pop_content_form").submit(function(event){
+                    event.preventDefault();
+                    let data = $(this).serializeArray()
+                    let value = data[0].value
+                    $("#mce-EMAIL").val(value)
+                    $("#mc-embedded-subscribe").click()
+                  })
+                   $('#mc-embedded-subscribe-form').ajaxChimp({
+                       url: 'https://gomaxlead.us5.list-manage.com/subscribe/post?u=c1f18c6df5eeddfdbf6e3c0f4&amp;id=6518e1a392&amp;f_id=0077bbedf0',
+                       callback: function(res){
+                           if(res.result == "success"){
+                              localStorage.setItem("isSubscribeBlock","true")
+                               $(".sub_pop_box").addClass("successful")
+                           }else{
+                              localStorage.setItem("isSubscribeBlock","false")
+                           }
+                       },
+                       utm_source: "",
+                       tag_id: '4548741'
+                   })
+                })
+              </script>
+            {% endif %}
+
           {%- when 'description' -%}
             {%- if block.settings.show_as_collapsible_content -%}
               <details-disclosure {{ block.shopify_attributes }}>
@@ -2336,6 +2488,71 @@
           "label": "Show custom label icon",
           "info": "Only applies when an icon is chosen in \"Theme Settings > Product labels > Custom label\".",
           "default": true
+        }
+      ]
+    },
+    {
+      "type": "coupon-code",
+      "name": "Coupon Code"
+    },
+    {
+      "type": "sub_pop",
+      "name": "Subscribe Pop New",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Icon"
+        },
+        {
+          "type": "richtext",
+          "label": "Text For PC",
+          "id": "text1"
+        },
+        {
+          "type": "richtext",
+          "label": "Text For Mobile",
+          "id": "text1_m"
+        },
+        {
+          "type": "text",
+          "id": "text2",
+          "label": "Right Text",
+          "default": "Enter your email"
+        },
+        {
+          "type": "header",
+          "content": "Not Subscribed"
+        },
+        {
+          "type": "text",
+          "id": "text3",
+          "label": "The 1st Text",
+          "default": "Welcome"
+        },
+        {
+          "type": "richtext",
+          "id": "text4",
+          "label": "The 2nd Text"
+        },
+        {
+          "type": "header",
+          "content": "Subscribed"
+        },
+        {
+          "type": "text",
+          "id": "text5",
+          "label": "The 1st Text"
+        },
+        {
+          "type": "richtext",
+          "id": "text6",
+          "label": "The 2nd Text"
+        },
+        {
+          "type": "richtext",
+          "id": "text7",
+          "label": "The 3rd Text"
         }
       ]
     },

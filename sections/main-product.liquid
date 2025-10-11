@@ -374,7 +374,8 @@
                  $(".sub_block_content").click(function(){
                     $("body").addClass("popshow")
                     $("html").addClass("popshow")
-                    $(".sub_pop_box").css('display', 'block').fadeIn()
+                    // 将弹窗移动到body的直接子元素以确保最高层级
+                    $(".sub_pop_box").appendTo("body").css('display', 'block').fadeIn()
                  })
                   $(".nosub_pop_content_form").submit(function(event){
                     event.preventDefault();

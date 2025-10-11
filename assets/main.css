@@ -2661,6 +2661,12 @@ td {
   font-size: 0.75em;
 }
 
+@media (min-width: 769px) {
+  .breadcrumbs {
+    font-size: 1em;
+  }
+}
+
 .breadcrumbs .icon {
   display: inline-block;
   width: 1.2em;
@@ -2706,14 +2712,16 @@ td {
   }
 
   .breadcrumbs-list {
-    flex: 1 0 auto;
+    flex: 1 1 auto;
+    min-width: 0;
   }
 
   .product-breadcrumbs .breadcrumbs-list__link {
-    max-width: 20em;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    max-width: none;
+    overflow: visible;
+    text-overflow: initial;
+    white-space: normal;
+    word-wrap: break-word;
   }
 
   .product-breadcrumbs .breadcrumbs-list__link:hover {
@@ -3964,7 +3972,7 @@ details-disclosure+details-disclosure .disclosure--row {
 }
 
 .price__current {
-  color: #00BADB; 
+  color: #00BADB;
   padding-inline-end: 0.5rem;
   font-size: 1em;
   font-weight: bold;

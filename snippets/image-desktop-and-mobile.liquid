@@ -50,7 +50,7 @@
   <picture{% if picture_id %} id="{{ picture_id }}"{% endif %}{% if class %} class="{{ class | replace: 'hidden sm:block', '' | strip }}"{% endif %}>
     {%- liquid
       render 'image', image: mobile_image, src_width: src_width_mobile, widths: widths_mobile, class: 'img-fit', lazy_load: lazy_load, fetchpriority: fetchpriority, sizes: sizes, as_mobile_source: true
-      render 'image', image: desktop_image, src_width: src_width_desktop, widths: widths_desktop, class: class, lazy_load: lazy_load, fetchpriority: fetchpriority, sizes: sizes
+      render 'image', image: desktop_image, src_width: src_width_desktop, widths: widths_desktop, class: 'img-fit', lazy_load: lazy_load, fetchpriority: fetchpriority, sizes: sizes
     -%}
   </picture>
 {%- else -%}

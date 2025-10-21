@@ -136,6 +136,20 @@
   color: rgba(var(--text-color), 0.7);
 }
 
+/* Footer link with icon styles */
+.footer-link-with-icon {
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+}
+
+.footer-col--links .footer-menu__links .footer-link-with-icon .footer-icon {
+  width: 20px !important;
+  height: 20px !important;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
 /* Payment Method column */
 .footer-col--payment {
   grid-column: 5;
